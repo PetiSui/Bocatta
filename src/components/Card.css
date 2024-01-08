@@ -1,0 +1,73 @@
+:root{
+    --ff-size-s: 0.87rem;
+    --ff-size-m: 1.15rem;
+    --ff-size-l: 1.46rem;
+    --ff-size-xl: 2rem;
+
+    --fw-light: 200;
+    --fw-normal: 400;
+    --fw-bold: 600;
+
+    --ff: Roboto, system-ui;
+}
+
+
+p{
+    font-size: 4rem;
+    font-weight: var(--fw-bold);
+    font-family: var(--ff);
+}
+
+label{
+    font-size: var(--ff-size-m);
+    font-weight: var(--fw-normal);
+    font-family: var(--ff);
+}
+
+h1{
+    font-size: var(--ff-size-xl);
+    font-weight: var(--fw-bold);
+    font-family: var(--ff);
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.params{
+    display: flex;
+    gap: 1rem;
+}
+
+.inputName{
+    border: 1px solid grey;
+    border-radius: .3rem;
+    width: 60ch;
+}
+
+.main{
+    margin-bottom: 4rem;
+}
+
+.buttonSearch{
+    padding: .75rem;
+    background-color: rgb(14, 103, 154);
+    border: 0;
+    border-radius: .5rem;
+    font-weight: var(--ff-size-l);
+}
+
+.buttonSearch:hover{
+    background-color: rgb(36, 156, 226);
+    opacity: .9;
+    transform: scale(1.1);
+    transition: transform ease-out 150ms;
+}
+
+.card{
+    border: 1px solid red;
+    max-width: 300px;
+}
