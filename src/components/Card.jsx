@@ -9,6 +9,7 @@ function Card(props) {
   return (
     <>
       <div className="card">
+        <img src={image1} alt="TEST" />
         
       </div>
     </>
