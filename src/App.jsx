@@ -52,14 +52,9 @@ function App() {
     const query = addressObject.formatted_address;
     updateQuery(query);
     //console.log({ query });
+
+
     //console.dir(addressObject);
-
-    const latLng = {
-      lat: addressObject?.geometry?.location?.lat(),
-      lng: addressObject?.geometry?.location?.lng(),
-    };
-
-    //console.log({ latLng });
   };
 
   useEffect(() => {
@@ -71,8 +66,6 @@ function App() {
 
     return () => { setEstablishment('') }
   }, []);
-
-  useEffect(() => {}, [addressObject]);
 
   return (
     <>
@@ -93,15 +86,16 @@ function App() {
           </div>
           <button
             className="buttonSearch"
-            onClick={() => {
-              searchEstablishment();
-            }}
+            onClick={() => searchEstablishment()
+            }
           >
             Buscar
           </button>
         </main>
 
-        {addressObject != null ? <Card data={addressObject} /> : null}
+        {/* {addressObject != null ? <Card data={addressObject} /> : null} */}
+
+        <Card data={addressObject}></Card>
       </div>
     </>
   );
