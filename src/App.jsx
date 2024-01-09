@@ -3,11 +3,12 @@ import Card from "./components/Card.jsx";
 import "./App.css";
 import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 
-
 let autoComplete;
 var addressObject;
 
-const searchEstablishment = () => {google.maps.event.trigger(autoComplete, 'place_changed');};
+const searchEstablishment = () => {
+  google.maps.event.trigger(autoComplete, "place_changed");
+};
 
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
@@ -53,7 +54,6 @@ function App() {
     updateQuery(query);
     //console.log({ query });
 
-
     //console.dir(addressObject);
   };
 
@@ -64,7 +64,9 @@ function App() {
       () => handleScriptLoad(setEstablishment, autoCompleteRef)
     );
 
-    return () => { setEstablishment('') }
+    return () => {
+      setEstablishment("");
+    };
   }, []);
 
   return (
@@ -86,16 +88,15 @@ function App() {
           </div>
           <button
             className="buttonSearch"
-            onClick={() => searchEstablishment()
-            }
+            onClick={() => searchEstablishment()}
           >
             Buscar
           </button>
         </main>
 
-        {/* {addressObject != null ? <Card data={addressObject} /> : null} */}
-
-        <Card data={addressObject}></Card>
+        <div className="tarjeta">
+          <Card data={addressObject}></Card>
+        </div>
       </div>
     </>
   );

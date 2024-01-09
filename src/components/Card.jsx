@@ -432,20 +432,24 @@ function Card(data) {
   //let liked = true; // TODO : change for localStorage
   let [liked, setLiked] = useState(false);
   console.log(data.data);
-  if(data != undefined){
-    console.log(data?.data?.photos[0]?.getUrl({'maxWidth': 500, 'maxHeight': 500}));
+  if (data != undefined) {
+    console.log(
+      data?.data?.photos[0]?.getUrl({ maxWidth: 500, maxHeight: 500 })
+    );
   }
   const share = (link) => {};
 
   console.log("CARD RENDERED");
 
-  
-
   const Rating = ({ starCount }) => {
     let MAX_RATING = 5;
     let rating = parseFloat(starCount);
-    if(rating > MAX_RATING){ rating = MAX_RATING }
-    if(rating < 0.0){ rating = 0.0 };
+    if (rating > MAX_RATING) {
+      rating = MAX_RATING;
+    }
+    if (rating < 0.0) {
+      rating = 0.0;
+    }
     let wholeStars = Math.floor(rating);
 
     let stars = Array.from({ length: MAX_RATING });
@@ -453,7 +457,11 @@ function Card(data) {
     let i;
     for (i = 0; i < wholeStars; i++) {
       stars[i] = (
-        <FontAwesomeIcon icon={faStarSolid} className="star"></FontAwesomeIcon>
+        <FontAwesomeIcon
+          icon={faStarSolid}
+          className="star"
+          key={i}
+        ></FontAwesomeIcon>
       );
     }
 
@@ -462,6 +470,7 @@ function Card(data) {
         <FontAwesomeIcon
           icon={faStarHalfSolid}
           className="star half-star"
+          key={i}
         ></FontAwesomeIcon>
       );
     }
@@ -469,16 +478,20 @@ function Card(data) {
     return <div className="rating">{stars}</div>;
   };
 
-  const Telephone = ( {telephoneNumber} ) => {
-    let telefono = telephoneNumber.replace(' ', '');
+  const Telephone = ({ telephoneNumber }) => {
+    if(!telephoneNumber) return null;
+    let telefono = telephoneNumber.replace(" ", "") || '';
+    console.log("Telephone: " + telefono + " rendered");
     let regexp = new RegExp("^[0-9+]+$");
-    if(regexp.test(telefono)){
-      return <a href="tel:"{...telefono}>{telefono}</a>
-    }else{
-      return null;
+    if (regexp.test(telefono)) {
+      return (
+        <a href={`tel:${telephoneNumber}`}>
+          {telefono}
+        </a>
+      );
     }
-  }
-  
+  };
+
   return (
     <>
       <div className="card">
@@ -489,7 +502,9 @@ function Card(data) {
           tempore cumque! Architecto alias non quaerat amet. Suscipit fugit
           ullam nihil porro.
         </p>
-        <Telephone telephoneNumber={data?.data?.formatted_phone_number}></Telephone>
+        <Telephone
+          telephoneNumber={data?.data?.formatted_phone_number}
+        ></Telephone>
         <div className="buttons">
           <button>
             <FontAwesomeIcon

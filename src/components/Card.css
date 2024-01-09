@@ -15,6 +15,7 @@
     --clr-heart: rgb(237, 41, 15);
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
+    --clr-shadow: rgb(212, 211, 211);
 }
 
 
@@ -88,6 +89,7 @@ h1{
     border-radius: 10px;
     padding: 1rem;
     border-top: .7rem solid var(--clr-primary);
+    box-shadow: 0 0.5rem 1rem -0.5rem var(--clr-shadow);
 }
 
 .caratula{
@@ -135,4 +137,16 @@ button{
     right: 0;
     margin-right: .7rem;
     margin-bottom: .7rem;
+}
+
+@media (prefers-color-scheme: light) {
+  
+    :root{
+        --clr-card: rgb(230, 230, 230);
+        --clr-heart: rgb(237, 41, 15);
+        --clr-dark-grey: rgb(80, 78, 78);
+        --clr-light-grey: rgb(162, 162, 162);
+        --clr-shadow: rgb(0, 0, 0);
+    }
+
 }

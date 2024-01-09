@@ -1,4 +1,4 @@
-:root{
+:root {
   --ff-size-s: 0.87rem;
   --ff-size-m: 1.15rem;
   --ff-size-l: 1.46rem;
@@ -11,58 +11,74 @@
   --ff: Roboto, system-ui;
 }
 
-
-p{
+p {
   font-size: 4rem;
   font-weight: var(--fw-bold);
   font-family: var(--ff);
 }
 
-label{
+label {
   font-size: var(--ff-size-m);
   font-weight: var(--fw-normal);
   font-family: var(--ff);
 }
 
-h1{
-  font-size: var(--ff-size-xl);
+h1 {
+  font-size: max(6dvw, var(--ff-size-l));
   font-weight: var(--fw-bold);
   font-family: var(--ff);
+  text-wrap: balance;
 }
 
-.main{
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
-.params{
+.params {
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  gap: 0.7rem;
 }
 
-.inputName{
+.inputName {
   border: 1px solid grey;
-  border-radius: .3rem;
-  width: 60ch;
+  border-radius: 0.3rem;
+  width: clamp(50vw, 65ch, 70vw);
+  height: 3ch;
 }
 
-.main{
+.main {
   margin-bottom: 4rem;
 }
 
-.buttonSearch{
-  padding: .75rem;
+.buttonSearch {
+  padding: 0.75rem;
   background-color: rgb(14, 103, 154);
   border: 0;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   font-weight: var(--ff-size-l);
 }
 
-.buttonSearch:hover{
+.buttonSearch:hover {
   background-color: rgb(36, 156, 226);
-  opacity: .9;
+  opacity: 0.9;
   transform: scale(1.1);
   transition: transform ease-out 150ms;
+}
+
+.tarjeta {
+  display: flex;
+  place-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .params {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
 }
