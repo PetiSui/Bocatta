@@ -11,11 +11,12 @@
     --ff: Roboto, system-ui;
 
     --clr-card: rgb(230, 230, 230);
+    --clr-text: rgb(22, 22, 22);
     --clr-primary: rgb(72, 218, 218);
-    --clr-heart: rgb(237, 41, 15);
+    --clr-heart: rgb(204, 51, 51);
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
-    --clr-shadow: rgb(212, 211, 211);
+    --clr-shadow: rgba(208, 208, 208, 0.375);
 }
 
 
@@ -23,6 +24,8 @@ p{
     font-size: 4rem;
     font-weight: var(--fw-bold);
     font-family: var(--ff);
+    color: var(--clr-text);
+    margin-block: .5rem;
 }
 
 label{
@@ -74,28 +77,25 @@ h1{
     transition: transform ease-out 150ms;
 }
 
-.card{
-    /* border: 1px solid red; */
-    max-width: 300px;
-    position: relative;
-}
-
 .star{
     color: yellow;
 }
 
 .card{
+    max-width: 300px; /* Remove when adding to grid template  */
+    position: relative;
     background-color: var(--clr-card);
     border-radius: 10px;
     padding: 1rem;
     border-top: .7rem solid var(--clr-primary);
-    box-shadow: 0 0.5rem 1rem -0.5rem var(--clr-shadow);
+    box-shadow: 0 1rem 1.5rem -0.5rem var(--clr-shadow);
+    aspect-ratio: 16 / 9;
 }
 
 .caratula{
     max-width: 100%;
     height: auto;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 .descripcion{
@@ -125,11 +125,17 @@ button{
     filter: drop-shadow(-1px 2px 7px #6b6b6b);
 }
 
-.heart{
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.like{
     color: var(--clr-heart);
-    /* border: 1px solid grey; */
     border-radius: 50%;
-    filter: drop-shadow(-1px 2px 7px #6b6b6b);
+    filter: drop-shadow(-1px 2px 7px rgba(124, 124, 124, 0.412));
     padding: .6rem;
     background-color: white;
     position: absolute;
@@ -137,16 +143,108 @@ button{
     right: 0;
     margin-right: .7rem;
     margin-bottom: .7rem;
+    align-self: flex-end;
+    animation-play-state: paused;
+}
+.phone{
+    color: var(--clr-text);
+}
+
+.phone_details:hover .phone{
+    animation: phoneShake ease-in-out .6s;
+}
+
+.phone_details{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: 1.1rem;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(23, 105, 153);
+    font-weight: var(--fw-bold);
+}
+
+/* .like[data-liked=true]:hover{
+    transform: scale(1.15);
+    transition: transform ease 150ms;
+} */
+
+.like[data-liked=false]{
+    animation: heartbeat 1s 1;
+}
+.like[data-liked=true]{
+    animation: shake .5s 1;
+}
+
+@keyframes phoneShake {
+    0% { transform: translate(0px, 0px) rotate(-10deg); }
+    20% { transform: translate(0px, 0px) rotate(10deg); }
+    40% { transform: translate(0px, 0px) rotate(-10deg); }
+    60% { transform: translate(0px, 0px) rotate(10deg); }
+    80% { transform: translate(0px, 0px) rotate(-10deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+  }
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( 1 );
+  }
+  20%
+  {
+    transform: scale( .75 );
+  }
+  40%
+  {
+    transform: scale( 1 );
+  }
+  60%
+  {
+    transform: scale( .75 );
+  }
+  80%
+  {
+    transform: scale( 1 );
+  }
+  100%
+  {
+    transform: scale( 1 );
+  }
 }
 
 @media (prefers-color-scheme: light) {
   
     :root{
-        --clr-card: rgb(230, 230, 230);
+        --clr-text: rgb(229, 229, 229);
+        --clr-card: rgb(50, 50, 50);
         --clr-heart: rgb(237, 41, 15);
         --clr-dark-grey: rgb(80, 78, 78);
         --clr-light-grey: rgb(162, 162, 162);
-        --clr-shadow: rgb(0, 0, 0);
+        --clr-shadow: rgba(0, 40, 80, 0.2);
+    }
+
+    p{
+        color: var(--clr-text);
     }
 
 }

@@ -10,6 +10,7 @@ import { faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocation } from "@fortawesome/free-solid-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import "./Card.css";
 
@@ -437,7 +438,20 @@ function Card(data) {
       data?.data?.photos[0]?.getUrl({ maxWidth: 500, maxHeight: 500 })
     );
   }
-  const share = (link) => {};
+  const share = (link, name, address) => {
+    let shareData = {
+      title: name,
+      text: address,
+      url: link,
+    };
+
+    if (navigator.share) {
+      navigator
+        .share(shareData)
+        .then(() => console.log("Shared successfully"))
+        .catch((error) => console.error("Sharing failed:", error));
+    }
+  };
 
   console.log("CARD RENDERED");
 
@@ -479,17 +493,20 @@ function Card(data) {
   };
 
   const Telephone = ({ telephoneNumber }) => {
-    if(!telephoneNumber) return null;
-    let telefono = telephoneNumber.replace(" ", "") || '';
-    console.log("Telephone: " + telefono + " rendered");
-    let regexp = new RegExp("^[0-9+]+$");
-    if (regexp.test(telefono)) {
-      return (
-        <a href={`tel:${telephoneNumber}`}>
-          {telefono}
+    if (!telephoneNumber) return null;
+    //let telefono = telephoneNumber.replace(" ", "") || '';
+    //console.log("Telephone: " + telefono + " rendered");
+    //let regexp = new RegExp("^[0-9+]+$");
+    //if (regexp.test(telefono)) {
+    return (
+      <div className="phone_details">
+        <FontAwesomeIcon icon={faPhone} className="phone"></FontAwesomeIcon>
+        <a href={`tel:${telephoneNumber}`} className="telephone_number">
+          {telephoneNumber}
         </a>
-      );
-    }
+      </div>
+    );
+    //}
   };
 
   return (
@@ -506,7 +523,13 @@ function Card(data) {
           telephoneNumber={data?.data?.formatted_phone_number}
         ></Telephone>
         <div className="buttons">
-          <button>
+          <button
+            onClick={
+              data?.data?.url != null
+                ? () => window.open(data?.data?.url, "_blank")
+                : null
+            }
+          >
             <FontAwesomeIcon
               icon={faMapLocation}
               size="lg"
@@ -515,7 +538,7 @@ function Card(data) {
           </button>
           <button
             onClick={
-              data.website != null
+              data?.data?.website != null
                 ? () => window.open(data?.data?.website, "_blank")
                 : null
             }
@@ -528,7 +551,11 @@ function Card(data) {
           </button>
           <button
             onClick={() => {
-              share(data.url);
+              share(
+                data?.data?.url,
+                data?.data?.name,
+                data?.data?.formatted_address
+              );
             }}
           >
             <FontAwesomeIcon
@@ -542,14 +569,16 @@ function Card(data) {
             {liked ? (
               <FontAwesomeIcon
                 icon={faHeartBroken}
-                className="heart"
+                className="like"
                 size="lg"
+                data-liked={liked}
               ></FontAwesomeIcon>
             ) : (
               <FontAwesomeIcon
                 icon={faHeart}
-                className="heart"
+                className="like"
                 size="lg"
+                data-liked={liked}
               ></FontAwesomeIcon>
             )}
           </button>
