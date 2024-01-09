@@ -468,18 +468,28 @@ function Card(data) {
 
     return <div className="rating">{stars}</div>;
   };
+
+  const Telephone = ( {telephoneNumber} ) => {
+    let telefono = telephoneNumber.replace(' ', '');
+    let regexp = new RegExp("^[0-9+]+$");
+    if(regexp.test(telefono)){
+      return <a href="tel:"{...telefono}>{telefono}</a>
+    }else{
+      return null;
+    }
+  }
   
   return (
     <>
       <div className="card">
         <img className="caratula" src={image1} alt="TEST" />
-        <p>{data?.rating}</p>
-        <Rating starCount={data.rating}></Rating>
+        <Rating starCount={data?.data?.rating}></Rating>
         <p className="descripcion">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
           tempore cumque! Architecto alias non quaerat amet. Suscipit fugit
           ullam nihil porro.
         </p>
+        <Telephone telephoneNumber={data?.data?.formatted_phone_number}></Telephone>
         <div className="buttons">
           <button>
             <FontAwesomeIcon
@@ -491,7 +501,7 @@ function Card(data) {
           <button
             onClick={
               data.website != null
-                ? () => window.open(data.website, "_blank")
+                ? () => window.open(data?.data?.website, "_blank")
                 : null
             }
           >
