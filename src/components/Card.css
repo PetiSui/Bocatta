@@ -10,7 +10,7 @@
 
     --ff: Roboto, system-ui;
 
-    --clr-card: rgb(230, 230, 230);
+    --clr-card: rgba(242, 242, 242, 0.975);  /*rgb(230, 230, 230); */
     --clr-text: rgb(22, 22, 22);
     --clr-primary: rgb(72, 218, 218);
     --clr-heart: rgb(204, 51, 51);
