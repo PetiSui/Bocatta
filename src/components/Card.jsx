@@ -431,14 +431,17 @@ var datax = {
 
 function Card(data) {
   //let liked = true; // TODO : change for localStorage
-  let [liked, setLiked] = useState(false);
-  console.log(data.data);
-  if (data != undefined) {
-    console.log(
-      data?.data?.photos[0]?.getUrl({ maxWidth: 500, maxHeight: 500 })
-    );
+  let [liked, setLiked] = useState();
+  console.log(data);
+
+  if (data.length === 0) {
+    return;
+    //console.log(
+    //  data?.data?.photos[0]?.getUrl({ maxWidth: 500, maxHeight: 500 })
+    //);
   }
-  const share = (link, name, address) => {
+
+  function share(link, name, address) {
     let shareData = {
       title: name,
       text: address,
@@ -451,9 +454,7 @@ function Card(data) {
         .then(() => console.log("Shared successfully"))
         .catch((error) => console.error("Sharing failed:", error));
     }
-  };
-
-  console.log("CARD RENDERED");
+  }
 
   const Rating = ({ starCount }) => {
     let MAX_RATING = 5;
@@ -494,10 +495,6 @@ function Card(data) {
 
   const Telephone = ({ telephoneNumber }) => {
     if (!telephoneNumber) return null;
-    //let telefono = telephoneNumber.replace(" ", "") || '';
-    //console.log("Telephone: " + telefono + " rendered");
-    //let regexp = new RegExp("^[0-9+]+$");
-    //if (regexp.test(telefono)) {
     return (
       <div className="phone_details">
         <FontAwesomeIcon icon={faPhone} className="phone"></FontAwesomeIcon>
@@ -506,83 +503,89 @@ function Card(data) {
         </a>
       </div>
     );
-    //}
+  };
+
+  const Street = ({ address, url }) => {
+    return (
+      <div className="phone_details">
+        <FontAwesomeIcon
+          icon={faMapLocation}
+          className="map"
+        ></FontAwesomeIcon>
+        <a href={url} target="_blank" className="address">
+          {address}
+        </a>
+      </div>
+    );
+  };
+
+  const ShareBar = () => {
+    return (
+      <div className="buttons">
+        <button
+          onClick={
+            data?.data?.website != null
+              ? () => window.open(data?.data?.website, "_blank")
+              : null
+          }
+        >
+          <FontAwesomeIcon
+            icon={faGlobe}
+            size="lg"
+            className="globe"
+          ></FontAwesomeIcon>
+        </button>
+        <button
+          onClick={() => {
+            share(data?.data?.url, data?.data?.name, data?.data?.address);
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faShare}
+            size="lg"
+            className="share"
+          ></FontAwesomeIcon>
+        </button>
+
+        <button
+          onClick={() => {
+            setLiked(!liked);
+            console.log(liked);
+          }}
+        >
+          {!liked ? (
+            <FontAwesomeIcon
+              icon={faHeartBroken}
+              className="like"
+              size="lg"
+              data-liked={liked}
+            ></FontAwesomeIcon>
+          ) : (
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="like"
+              size="lg"
+              data-liked={liked}
+            ></FontAwesomeIcon>
+          )}
+        </button>
+      </div>
+    );
   };
 
   return (
     <>
       <div className="card">
-        <img className="caratula" src={image1} alt="TEST" />
-        <Rating starCount={data?.data?.rating}></Rating>
-        <p className="descripcion">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
-          tempore cumque! Architecto alias non quaerat amet. Suscipit fugit
-          ullam nihil porro.
-        </p>
-        <Telephone
-          telephoneNumber={data?.data?.formatted_phone_number}
-        ></Telephone>
-        <div className="buttons">
-          <button
-            onClick={
-              data?.data?.url != null
-                ? () => window.open(data?.data?.url, "_blank")
-                : null
-            }
-          >
-            <FontAwesomeIcon
-              icon={faMapLocation}
-              size="lg"
-              className="map"
-            ></FontAwesomeIcon>
-          </button>
-          <button
-            onClick={
-              data?.data?.website != null
-                ? () => window.open(data?.data?.website, "_blank")
-                : null
-            }
-          >
-            <FontAwesomeIcon
-              icon={faGlobe}
-              size="lg"
-              className="globe"
-            ></FontAwesomeIcon>
-          </button>
-          <button
-            onClick={() => {
-              share(
-                data?.data?.url,
-                data?.data?.name,
-                data?.data?.formatted_address
-              );
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faShare}
-              size="lg"
-              className="share"
-            ></FontAwesomeIcon>
-          </button>
-
-          <button onClick={() => setLiked(!liked)}>
-            {liked ? (
-              <FontAwesomeIcon
-                icon={faHeartBroken}
-                className="like"
-                size="lg"
-                data-liked={liked}
-              ></FontAwesomeIcon>
-            ) : (
-              <FontAwesomeIcon
-                icon={faHeart}
-                className="like"
-                size="lg"
-                data-liked={liked}
-              ></FontAwesomeIcon>
-            )}
-          </button>
+        <div className="relative">
+          <img className="caratula" src={image1} alt="TEST" />
+          <Rating className="rating" starCount={data?.data?.rating}></Rating>
         </div>
+        <p className="descripcion">{data?.data?.name}</p>
+
+        <Street url={data?.data?.url} address={data?.data?.address}></Street>
+        <Telephone telephoneNumber={data?.data?.telephone}></Telephone>
+
+        <ShareBar></ShareBar>
       </div>
     </>
   );

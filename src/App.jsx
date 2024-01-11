@@ -31,6 +31,7 @@ const loadScript = (url, callback) => {
 
 function App() {
   const [establishment, setEstablishment] = useState("");
+  const [establishmentData, setEstablishmentData] = useState({});
   const autoCompleteRef = useRef(null);
 
   const handleScriptLoad = (query, autoCompleteRef) => {
@@ -50,18 +51,38 @@ function App() {
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
 
-    const query = addressObject.formatted_address;
-    updateQuery(query);
-    //console.log({ query });
+    let data = {
+      address: addressObject?.formatted_address || "",
+      name: addressObject?.name || "",
+      telephone: addressObject?.formatted_phone_number || "",
+      url: addressObject?.url || "",
+      website: addressObject?.website || "",
+      photos: addressObject?.photos || [],
+      rating: addressObject?.rating || "",
+      totalRatings: addressObject?.user_ratings_total || "",
+      priceLevel: addressObject?.price_level || "",
+    };
+    console.dir(data);
+    updateQuery(data);
+    setEstablishment(data?.address);
+  };
 
-    //console.dir(addressObject);
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    handlePlaceSelect(setEstablishmentData);
+  }
+
+  // Attach your callback function to the `window` object
+  window.initMap = function () {
+    // JS API is loaded and available
+    console.log("LOADED LIBRARY");
   };
 
   useEffect(() => {
-    console.log("LOADED LIBRARY");
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB08y8T9MQJpbtkr0sW8FdncZzsBewqqM8&libraries=places`,
-      () => handleScriptLoad(setEstablishment, autoCompleteRef)
+      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB08y8T9MQJpbtkr0sW8FdncZzsBewqqM8&libraries=places&callback=initMap`,
+      () => handleScriptLoad(setEstablishmentData, autoCompleteRef)
     );
 
     return () => {
@@ -73,29 +94,36 @@ function App() {
     <>
       <div className="app">
         <main className="main">
-          <h1>Inserte establecimiento</h1>
-          <div className="params">
-            <label>Nombre: </label>
-            <input
-              ref={autoCompleteRef}
-              type="text"
-              className="inputName"
-              name="Nombre"
-              value={establishment}
-              placeholder="Nombre"
-              onChange={(e) => setEstablishment(e.target.value)}
-            />
-          </div>
-          <button
-            className="buttonSearch"
-            onClick={() => searchEstablishment()}
-          >
-            Buscar
-          </button>
+          <form onSubmit={handleSubmit}>
+            <h1>Inserte establecimiento</h1>
+            <div className="params">
+              <label htmlFor="nombre">Nombre: </label>
+              <input
+                ref={autoCompleteRef}
+                type="text"
+                className="inputName"
+                name="Nombre"
+                id="nombre"
+                value={establishment}
+                placeholder="Nombre"
+                onChange={(e) => setEstablishment(e.target.value)}
+              />
+            </div>
+            <div className="submitButton">
+              <button
+                className="buttonSearch"
+                onClick={() => searchEstablishment()}
+              >
+                Buscar
+              </button>
+            </div>
+          </form>
         </main>
 
         <div className="tarjeta">
-          <Card data={addressObject}></Card>
+          {/* <Card data={addressObject}></Card> */}
+          <Card data={establishmentData}></Card>
+          
         </div>
       </div>
     </>

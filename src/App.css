@@ -11,6 +11,11 @@
   --ff: Roboto, system-ui;
 }
 
+body{
+  height: 100%;
+  width: auto;
+}
+
 p {
   font-size: 4rem;
   font-weight: var(--fw-bold);
@@ -23,11 +28,15 @@ label {
   font-family: var(--ff);
 }
 
+
+
 h1 {
-  font-size: max(6dvw, var(--ff-size-l));
+  font-size: max(4dvw, var(--ff-size-xl));
   font-weight: var(--fw-bold);
   font-family: var(--ff);
   text-wrap: balance;
+  display: flex;
+  place-content: center;
 }
 
 .main {
@@ -46,7 +55,7 @@ h1 {
 .inputName {
   border: 1px solid grey;
   border-radius: 0.3rem;
-  width: clamp(50vw, 65ch, 70vw);
+  width: clamp(55vw, 65ch, 70vw);
   height: 3ch;
 }
 
@@ -60,6 +69,12 @@ h1 {
   border: 0;
   border-radius: 0.5rem;
   font-weight: var(--ff-size-l);
+}
+
+.submitButton{
+  display: flex;
+  place-content: center;
+  margin-top: .5rem;
 }
 
 .buttonSearch:hover {

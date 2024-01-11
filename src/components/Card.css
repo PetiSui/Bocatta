@@ -2,7 +2,7 @@
     --ff-size-s: 0.87rem;
     --ff-size-m: 1.15rem;
     --ff-size-l: 1.46rem;
-    --ff-size-xl: 2rem;
+    --ff-size-xl: 1.8rem;
 
     --fw-light: 200;
     --fw-normal: 400;
@@ -19,14 +19,10 @@
     --clr-shadow: rgba(208, 208, 208, 0.375);
 }
 
-
-p{
-    font-size: 4rem;
-    font-weight: var(--fw-bold);
-    font-family: var(--ff);
-    color: var(--clr-text);
-    margin-block: .5rem;
+*{
+    box-sizing: border-box;
 }
+
 
 label{
     font-size: var(--ff-size-m);
@@ -85,24 +81,42 @@ h1{
     max-width: 300px; /* Remove when adding to grid template  */
     position: relative;
     background-color: var(--clr-card);
-    border-radius: 10px;
-    padding: 1rem;
+    border-radius: 15px;
+    padding: 1rem;padding-top: 1.25rem;
     border-top: .7rem solid var(--clr-primary);
-    box-shadow: 0 1rem 1.5rem -0.5rem var(--clr-shadow);
+    box-shadow: .5rem .7rem .95rem -0.4rem var(--clr-shadow);
     aspect-ratio: 16 / 9;
 }
 
 .caratula{
     max-width: 100%;
     height: auto;
-    /* object-fit: cover; */
+    border-image: fill 0 linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.478));
+    border-radius: 15px;
+}
+
+.relative{
+    position: relative;
+}
+
+.rating{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: .4rem;
+    margin-left: .2rem;
 }
 
 .descripcion{
-    font-size: var(--ff-size-s);
     text-wrap: balance;
     text-align: left;
     line-clamp: 4;
+    font-size: var(--ff-size-m);
+    font-weight: var(--fw-bold);
+    font-family: var(--ff);
+    color: var(--clr-text);
+    margin-top: .4rem;
+    margin-bottom: .8rem;
 }
 
 button{
@@ -116,7 +130,7 @@ button{
 }
 
 .map{
-    padding: .2rem;
+    color: var(--clr-text);
     filter: drop-shadow(-1px 2px 7px #6b6b6b);
 }
 
@@ -146,6 +160,7 @@ button{
     align-self: flex-end;
     animation-play-state: paused;
 }
+
 .phone{
     color: var(--clr-text);
 }
@@ -167,6 +182,12 @@ a{
     text-decoration: none;
     color: rgb(23, 105, 153);
     font-weight: var(--fw-bold);
+    font-size: var(--ff-size-s);
+    overflow: hidden;
+    display: -webkit-box;
+    width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* .like[data-liked=true]:hover{
@@ -174,10 +195,10 @@ a{
     transition: transform ease 150ms;
 } */
 
-.like[data-liked=false]{
+.like[data-liked=true]{
     animation: heartbeat 1s 1;
 }
-.like[data-liked=true]{
+.like[data-liked=false]{
     animation: shake .5s 1;
 }
 
