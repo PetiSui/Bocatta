@@ -507,7 +507,7 @@ function Card(data) {
 
   const Street = ({ address, url }) => {
     return (
-      <div className="phone_details">
+      <div className="street_details">
         <FontAwesomeIcon
           icon={faMapLocation}
           className="map"
@@ -573,7 +573,8 @@ function Card(data) {
     );
   };
 
-  return (
+   return (
+    (Object.entries(data?.data).length != 0) ? 
     <>
       <div className="card">
         <div className="relative">
@@ -588,7 +589,7 @@ function Card(data) {
         <ShareBar></ShareBar>
       </div>
     </>
-  );
+   : <></>)
 }
 
 export default Card;

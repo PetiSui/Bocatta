@@ -82,8 +82,9 @@ h1{
     position: relative;
     background-color: var(--clr-card);
     border-radius: 15px;
-    padding: 1rem;padding-top: 1.25rem;
-    border-top: .7rem solid var(--clr-primary);
+    padding: .8rem;
+    padding-top: 1.25rem;
+    border-top: .6rem solid var(--clr-primary);
     box-shadow: .5rem .7rem .95rem -0.4rem var(--clr-shadow);
     aspect-ratio: 16 / 9;
 }
@@ -169,6 +170,15 @@ button{
     animation: phoneShake ease-in-out .6s;
 }
 
+.street_details{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    padding: 0;
+}
+
 .phone_details{
     display: flex;
     flex-direction: row;
@@ -186,7 +196,7 @@ a{
     overflow: hidden;
     display: -webkit-box;
     width: 100%;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
