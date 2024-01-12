@@ -82,7 +82,7 @@ h1 {
   background-color: var(--clr-card);
   border-radius: 15px;
   padding: 0.8rem;
-  padding-top: 1-05rem;
+  padding-top: .8rem;
   border-top: 0.6rem solid var(--clr-primary);
   box-shadow: 0.5rem 0.7rem 0.95rem -0.4rem var(--clr-shadow);
   aspect-ratio: 16 / 9;
@@ -141,6 +141,7 @@ button {
 .share {
   padding: 0.2rem;
   filter: drop-shadow(-1px 1px 3px rgba(0, 0, 0, 0.716));
+  scale: 1.25;
 }
 
 .map {
@@ -151,6 +152,7 @@ button {
 .globe {
   padding: 0.2rem;
   filter: drop-shadow(-1px 1px 3px rgba(0, 0, 0, 0.716));
+  scale: 1.25;
 }
 
 .buttons {
@@ -158,6 +160,8 @@ button {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  gap: .3rem;
+  margin-top: 1.5rem;
 }
 
 .like {
