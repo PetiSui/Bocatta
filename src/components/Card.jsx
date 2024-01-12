@@ -432,6 +432,7 @@ var datax = {
 function Card(data) {
   //let liked = true; // TODO : change for localStorage
   let [liked, setLiked] = useState();
+  const [imageSourceUrl, setImageSourceUrl] = useState("");
   console.log(data);
 
   if (data.length === 0) {
@@ -508,10 +509,7 @@ function Card(data) {
   const Street = ({ address, url }) => {
     return (
       <div className="street_details">
-        <FontAwesomeIcon
-          icon={faMapLocation}
-          className="map"
-        ></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faMapLocation} className="map"></FontAwesomeIcon>
         <a href={url} target="_blank" className="address">
           {address}
         </a>
@@ -573,14 +571,20 @@ function Card(data) {
     );
   };
 
-   return (
-    (Object.entries(data?.data).length != 0) ? 
+  const Image = ({ images, rating, name }) => {
+    const image = images[8].getUrl({ maxWidth: 400, maxHeight: 300 });
+    setImageSourceUrl(image);
+    return (
+      <div className="relative">
+        <img className="caratula" src={imageSourceUrl} alt={name} />
+        <Rating className="rating" starCount={rating}></Rating>
+      </div>
+    );
+  };
+  return Object.entries(data?.data).length != 0 ? (
     <>
       <div className="card">
-        <div className="relative">
-          <img className="caratula" src={image1} alt="TEST" />
-          <Rating className="rating" starCount={data?.data?.rating}></Rating>
-        </div>
+        <Image images={data?.data?.photos} rating={data?.data?.rating} description={data?.data?.name}></Image>
         <p className="descripcion">{data?.data?.name}</p>
 
         <Street url={data?.data?.url} address={data?.data?.address}></Street>
@@ -589,7 +593,9 @@ function Card(data) {
         <ShareBar></ShareBar>
       </div>
     </>
-   : <></>)
+  ) : (
+    <></>
+  );
 }
 
 export default Card;
