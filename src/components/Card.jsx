@@ -18,9 +18,6 @@ function Card(data) {
 
   if (data.length === 0) {
     return;
-    //console.log(
-    //  data?.data?.photos[0]?.getUrl({ maxWidth: 500, maxHeight: 500 })
-    //);
   }
 
   function share(link, name, address) {
@@ -125,7 +122,6 @@ function Card(data) {
             className="share"
           ></FontAwesomeIcon>
         </button>
-
         <button
           onClick={() => {
             setLiked(!liked);
@@ -153,7 +149,7 @@ function Card(data) {
   };
 
   const Image = ({ images, rating, name }) => {
-    const image = images[8].getUrl({ maxWidth: 400, maxHeight: 300 });
+    const image = images[0].getUrl({ maxWidth: 400, maxHeight: 300 });
     setImageSourceUrl(image);
     return (
       <div className="relative">

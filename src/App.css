@@ -28,26 +28,24 @@ label {
   font-family: var(--ff);
 }
 
-
-
 h1 {
-  font-size: max(4dvw, var(--ff-size-xl));
+  font-size: max(4dvw, calc(var(--ff-size-xl)*1.1));
   font-weight: var(--fw-bold);
   font-family: var(--ff);
   text-wrap: balance;
-  display: flex;
-  place-content: center;
+  text-align: center;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  place-items: center;
   gap: 1rem;
 }
 
 .params {
   display: flex;
+  justify-content: center;
+  place-items: center;
   flex-direction: row;
   gap: 0.7rem;
 }
@@ -55,8 +53,8 @@ h1 {
 .inputName {
   border: 1px solid grey;
   border-radius: 0.3rem;
-  width: clamp(55vw, 65ch, 70vw);
-  height: 3ch;
+  width: clamp(50ch, 70ch, 80dvh);
+  height: 4ch;
 }
 
 .main {
@@ -85,15 +83,29 @@ h1 {
 }
 
 .tarjeta {
-  display: flex;
-  place-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  place-items: center;
+  gap: 3rem;
 }
 
-@media (max-width: 600px) {
+/* CARDFORM CSS */
+.update_image{
+  display: flex;
+  gap: .5rem;
+}
+
+.edit_params{
+  display: flex;
+  flex-direction: column;
+}
+
+/* END CARDFORM CSS */
+
+/* @media (max-width: 600px) {
   .params {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
   }
-}
+} */

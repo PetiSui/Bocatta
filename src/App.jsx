@@ -30,6 +30,14 @@ const loadScript = (url, callback) => {
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
+const modifyData = (id, value) => {
+  //TEST FOR BUGS
+  setEstablishmentData((prevState) => ({
+    ...prevState,
+    id: value,
+  }));
+};
+
 function App() {
   const [establishment, setEstablishment] = useState("");
   const [establishmentData, setEstablishmentData] = useState({});
@@ -61,7 +69,7 @@ function App() {
       photos: addressObject?.photos || [],
       rating: addressObject?.rating || "",
       priceLevel: addressObject?.price_level || "",
-      totalReviews: addressObject?.user_ratings_total || ""
+      totalReviews: addressObject?.user_ratings_total || "",
     };
     console.dir(data);
     updateQuery(data);
@@ -124,7 +132,15 @@ function App() {
         <div className="tarjeta">
           {/* <Card data={addressObject}></Card> */}
           <Card data={establishmentData}></Card>
-          <CardForm data={establishmentData}></CardForm>
+          {Object.entries(establishmentData).length != 0 ? (
+            <CardForm
+              data={establishmentData}
+              setData={setEstablishmentData}
+              modifyData={modifyData}
+            ></CardForm>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
