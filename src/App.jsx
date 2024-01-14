@@ -130,14 +130,16 @@ function App() {
         </main>
 
         <div className="tarjeta">
-          {/* <Card data={addressObject}></Card> */}
-          <Card data={establishmentData}></Card>
+
           {Object.entries(establishmentData).length != 0 ? (
-            <CardForm
-              data={establishmentData}
-              setData={setEstablishmentData}
-              modifyData={modifyData}
-            ></CardForm>
+            <>
+              <Card data={establishmentData}></Card>
+              <CardForm
+                data={establishmentData}
+                setData={setEstablishmentData}
+                modifyData={modifyData}
+              ></CardForm>
+            </>
           ) : (
             <></>
           )}

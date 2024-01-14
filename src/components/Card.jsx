@@ -158,18 +158,20 @@ function Card(data) {
       </div>
     );
   };
-  return Object.entries(data?.data).length != 0 ? (
+  return (
     <>
       <div className="card">
-        <Image images={data?.data?.photos} rating={data?.data?.rating} description={data?.data?.name}></Image>
+        <Image
+          images={data?.data?.photos}
+          rating={data?.data?.rating}
+          description={data?.data?.name}
+        ></Image>
         <p className="descripcion">{data?.data?.name}</p>
         <Street url={data?.data?.url} address={data?.data?.address}></Street>
         <Telephone telephoneNumber={data?.data?.telephone}></Telephone>
         <ShareBar></ShareBar>
       </div>
     </>
-  ) : (
-    <></>
   );
 }
 
