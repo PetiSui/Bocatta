@@ -42,6 +42,7 @@ function App() {
   const [establishment, setEstablishment] = useState("");
   const [establishmentData, setEstablishmentData] = useState({});
   const autoCompleteRef = useRef(null);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const handleScriptLoad = (query, autoCompleteRef) => {
     autoComplete = new window.google.maps.places.Autocomplete(
@@ -59,7 +60,7 @@ function App() {
 
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
-    console.dir(addressObject);
+    //console.dir(addressObject);
     let data = {
       address: addressObject?.formatted_address || "",
       name: addressObject?.name || "",
@@ -71,7 +72,7 @@ function App() {
       priceLevel: addressObject?.price_level || "",
       totalReviews: addressObject?.user_ratings_total || "",
     };
-    console.dir(data);
+    //console.dir(data);
     updateQuery(data);
     setEstablishment(data?.address);
   };
@@ -85,7 +86,7 @@ function App() {
   // Attach your callback function to the `window` object
   window.initMap = function () {
     // JS API is loaded and available
-    console.log("LOADED LIBRARY");
+    // console.log("LOADED LIBRARY");
   };
 
   useEffect(() => {
@@ -98,6 +99,14 @@ function App() {
       setEstablishment("");
     };
   }, []);
+
+  function decrementIndex(){
+    setImageIndex((imageIndex == 0) ? 0 : imageIndex-1);
+  }
+
+  function incrementIndex(){
+    setImageIndex((imageIndex == 10) ? 0 : imageIndex+1)
+  }
 
   return (
     <>
@@ -133,11 +142,14 @@ function App() {
 
           {Object.entries(establishmentData).length != 0 ? (
             <>
-              <Card data={establishmentData}></Card>
+              <Card data={establishmentData} indexImg={imageIndex}></Card>
               <CardForm
                 data={establishmentData}
                 setData={setEstablishmentData}
                 modifyData={modifyData}
+                indexImg={imageIndex}
+                decrementIndex={decrementIndex}
+                incrementIndex={incrementIndex}
               ></CardForm>
             </>
           ) : (

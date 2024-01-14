@@ -10,7 +10,7 @@ import { faMapLocation } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import "./Card.css";
 
-function Card(data) {
+function Card({ data, indexImg }) {
   //let liked = true; // TODO : change for localStorage
   let [liked, setLiked] = useState();
   const [imageSourceUrl, setImageSourceUrl] = useState("");
@@ -36,6 +36,8 @@ function Card(data) {
   }
 
   const Rating = ({ starCount }) => {
+    if(!starCount) return null;
+    
     let MAX_RATING = 5;
     let rating = parseFloat(starCount);
     if (rating > MAX_RATING) {
@@ -70,7 +72,7 @@ function Card(data) {
     }
 
     return <div className="rating">{stars}</div>;
-  };
+  }
 
   const Telephone = ({ telephoneNumber }) => {
     if (!telephoneNumber) return null;
@@ -85,6 +87,7 @@ function Card(data) {
   };
 
   const Street = ({ address, url }) => {
+    if (!address || !url) return null;
     return (
       <div className="street_details">
         <FontAwesomeIcon icon={faMapLocation} className="map"></FontAwesomeIcon>
@@ -100,8 +103,8 @@ function Card(data) {
       <div className="buttons">
         <button
           onClick={
-            data?.data?.website != null
-              ? () => window.open(data?.data?.website, "_blank")
+            data?.website != null
+              ? () => window.open(data?.website, "_blank")
               : null
           }
         >
@@ -113,7 +116,7 @@ function Card(data) {
         </button>
         <button
           onClick={() => {
-            share(data?.data?.url, data?.data?.name, data?.data?.address);
+            share(data?.url, data?.name, data?.address);
           }}
         >
           <FontAwesomeIcon
@@ -125,7 +128,6 @@ function Card(data) {
         <button
           onClick={() => {
             setLiked(!liked);
-            console.log(liked);
           }}
         >
           {!liked ? (
@@ -148,27 +150,30 @@ function Card(data) {
     );
   };
 
-  const Image = ({ images, rating, name }) => {
-    const image = images[0].getUrl({ maxWidth: 400, maxHeight: 300 });
+  const Image = ({ rating, name }) => {
+    console.log(indexImg);
+    const image = data?.photos[indexImg].getUrl({ maxWidth: 400, maxHeight: 300 });
     setImageSourceUrl(image);
+
     return (
       <div className="relative">
-        <img className="caratula" src={imageSourceUrl} alt={name} />
+        <img className="caratula" src={imageSourceUrl} alt={name} on/>
         <Rating className="rating" starCount={rating}></Rating>
       </div>
     );
   };
+
+
   return (
     <>
       <div className="card">
         <Image
-          images={data?.data?.photos}
-          rating={data?.data?.rating}
-          description={data?.data?.name}
+          rating={data?.rating}
+          description={data?.name}
         ></Image>
-        <p className="descripcion">{data?.data?.name}</p>
-        <Street url={data?.data?.url} address={data?.data?.address}></Street>
-        <Telephone telephoneNumber={data?.data?.telephone}></Telephone>
+        <p className="descripcion">{data?.name}</p>
+        <Street url={data?.url} address={data?.address}></Street>
+        <Telephone telephoneNumber={data?.telephone}></Telephone>
         <ShareBar></ShareBar>
       </div>
     </>

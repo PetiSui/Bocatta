@@ -3,18 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-function CardForm({ data, setData, modifyData }) {
-  let [imageIndex, setImageIndex] = useState(0);
+function CardForm({ data, setData, modifyData, indexImg, decrementIndex, incrementIndex }) {
+  //let [imageIndex, setImageIndex] = useState(0);
   
     return (
     <>
       <div className="edit_params">
         <div className="update_image">
-          <button onClick={() => setImageIndex(imageIndex == 0 ? 0 : imageIndex--)}>
+          <button onClick={() => decrementIndex()}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
-            <span>{imageIndex}/9</span>
-          <button onClick={() => setImageIndex(imageIndex == 10 ? 0 : imageIndex++)}>
+            <span>{indexImg}/9</span>
+          <button onClick={() => incrementIndex()}>
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
           <input type="file" name="newImage" id="image" />
