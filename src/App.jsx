@@ -30,14 +30,6 @@ const loadScript = (url, callback) => {
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
-const modifyData = (id, value) => {
-  //TEST FOR BUGS
-  setEstablishmentData((prevState) => ({
-    ...prevState,
-    id: value,
-  }));
-};
-
 function App() {
   const [establishment, setEstablishment] = useState("");
   const [establishmentData, setEstablishmentData] = useState({});
@@ -105,7 +97,18 @@ function App() {
   }
 
   function incrementIndex(){
-    setImageIndex((imageIndex == 10) ? 0 : imageIndex+1)
+    setImageIndex((imageIndex == 9) ? 0 : imageIndex+1)
+  }
+
+  function modifyData(id, value) {
+    //TEST FOR BUGS
+    console.dir(establishmentData);
+    console.log(`ID:${id} with value ${value}`);
+    setEstablishmentData((prevState) => ({
+      ...prevState,
+      [id] : value,
+    }));
+    console.dir(establishmentData);
   }
 
   return (
@@ -145,7 +148,6 @@ function App() {
               <Card data={establishmentData} indexImg={imageIndex}></Card>
               <CardForm
                 data={establishmentData}
-                setData={setEstablishmentData}
                 modifyData={modifyData}
                 indexImg={imageIndex}
                 decrementIndex={decrementIndex}

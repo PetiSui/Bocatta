@@ -96,6 +96,7 @@ h1 {
   /* border-image: fill 0 linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.113)); */
   border-radius: 10px 10px 0 0;
   object-fit: cover;
+  background-color: rgba(99, 99, 99, 0.579);
 }
 
 .relative {
@@ -219,6 +220,10 @@ a {
   width: 100%;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+
+a:hover{
+    -webkit-line-clamp: 3;
 }
 
 /* .like[data-liked=true]:hover{

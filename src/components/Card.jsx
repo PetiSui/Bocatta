@@ -14,7 +14,7 @@ function Card({ data, indexImg }) {
   //let liked = true; // TODO : change for localStorage
   let [liked, setLiked] = useState();
   const [imageSourceUrl, setImageSourceUrl] = useState("");
-  console.log(data);
+  //console.log(data);
 
   if (data.length === 0) {
     return;
@@ -151,13 +151,13 @@ function Card({ data, indexImg }) {
   };
 
   const Image = ({ rating, name }) => {
-    console.log(indexImg);
+    //console.log(indexImg);
     const image = data?.photos[indexImg].getUrl({ maxWidth: 400, maxHeight: 300 });
     setImageSourceUrl(image);
 
     return (
       <div className="relative">
-        <img className="caratula" src={imageSourceUrl} alt={name} on/>
+        <img className="caratula" src={imageSourceUrl} alt={name}/>
         <Rating className="rating" starCount={rating}></Rating>
       </div>
     );

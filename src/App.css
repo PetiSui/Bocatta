@@ -11,6 +11,10 @@
   --ff: Roboto, system-ui;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   height: 100%;
   width: auto;
@@ -93,11 +97,39 @@ h1 {
 .update_image{
   display: flex;
   gap: .5rem;
+  margin-bottom: 1.25rem;
 }
 
 .edit_params{
   display: flex;
   flex-direction: column;
+  outline: white solid 2px;
+  padding: 1rem;
+  outline-offset: 1rem;
+  border-radius: 5px;
+}
+
+.button_send {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: rgb(14, 103, 154);
+  border: 0;
+  border-radius: 0.5rem;
+  font-weight: var(--ff-size-l);
+}
+
+.button_counter{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: .3rem;
+}
+
+.button_counter:hover{
+  background-color: #807f7f;
+}
+
+.button_counter:active{
+  transform: scale(0.8);
 }
 
 /* END CARDFORM CSS */
