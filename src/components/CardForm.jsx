@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from 'uuid';
 
 function CardForm({
   data,
@@ -10,11 +11,18 @@ function CardForm({
   decrementIndex,
   incrementIndex,
 }) {
+  const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
+
+  useEffect(() => {
+    console.log(categoriasSeleccionadas);
+    modifyData("categories", ...categoriasSeleccionadas);
+  }, [categoriasSeleccionadas]);
+
   const categorias = [
     "Almuerzos",
     "Argentino",
     "Bocadillos",
-    "Bufffet",
+    "Buffet",
     "Desayunos",
     "Hamburguesas",
     "Horchateria",
@@ -24,8 +32,15 @@ function CardForm({
     "Tapas",
   ];
 
-  function addCategoria(categoria){
-    console.log(categoria);
+  function handleCategorias(categoria) {
+    categoriasSeleccionadas.includes(categoria)
+      ? setCategoriasSeleccionadas((prevCategorias) =>
+          prevCategorias.filter((categ) => categ != categoria)
+        )
+      : setCategoriasSeleccionadas((prevCategorias) => [
+          ...prevCategorias,
+          categoria,
+        ]);
   }
 
   return (
@@ -46,15 +61,16 @@ function CardForm({
         <div className="categorias">
           {categorias.map((categoria) => {
             return (
-              <div>
+              <div key={uuidv4()}>
                 <input
-                  key={categoria}
+                  key={uuidv4()}
                   type="checkbox"
+                  id={categoria}
                   value={categoria}
                   name={categoria}
-                  onClick={ () => addCategoria({categoria})}
+                  onClick={() => handleCategorias(categoria)}
                 />
-                <label>{categoria}</label>
+                <label key={uuidv4()} htmlFor={categoria}>{categoria}</label>
               </div>
             );
           })}
@@ -64,6 +80,8 @@ function CardForm({
           <input
             type="text"
             name="rating"
+            id="rating"
+            key="rating"
             defaultValue={data?.rating}
             size="4"
             onChange={(e) => {
@@ -75,7 +93,9 @@ function CardForm({
           <label htmlFor="description">Name: </label>
           <input
             type="text"
-            name="name"
+            name="description"
+            id="description"
+            key="description"
             defaultValue={data?.name}
             size="50"
             onChange={(e) => {
@@ -88,6 +108,8 @@ function CardForm({
           <input
             type="text"
             name="address"
+            id="address"
+            key="address"
             defaultValue={data?.address}
             size="50"
             onChange={(e) => {
@@ -100,6 +122,8 @@ function CardForm({
           <input
             type="text"
             name="telephone"
+            id="telephone"
+            key="telephone"
             defaultValue={data?.telephone}
             onChange={(e) => {
               modifyData("telephone", e.target.value);
@@ -111,6 +135,8 @@ function CardForm({
           <input
             type="text"
             name="website"
+            id="website"
+            key="website"
             defaultValue={data?.website}
             size="35"
             onChange={(e) => {

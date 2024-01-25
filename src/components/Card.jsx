@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStarHalf as faStarHalfSolid } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocation } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from 'uuid';
 import "./Card.css";
 
 function Card({ data, indexImg }) {
@@ -15,6 +16,13 @@ function Card({ data, indexImg }) {
   let [liked, setLiked] = useState();
   const [imageSourceUrl, setImageSourceUrl] = useState("");
   //console.log(data);
+  useEffect(() => {
+    const image = data?.photos[indexImg].getUrl({
+      maxWidth: 400,
+      maxHeight: 300,
+    });
+    setImageSourceUrl(image);
+  }, [indexImg]);
 
   if (data.length === 0) {
     return;
@@ -36,8 +44,8 @@ function Card({ data, indexImg }) {
   }
 
   const Rating = ({ starCount }) => {
-    if(!starCount) return null;
-    
+    if (!starCount) return null;
+
     let MAX_RATING = 5;
     let rating = parseFloat(starCount);
     if (rating > MAX_RATING) {
@@ -72,7 +80,7 @@ function Card({ data, indexImg }) {
     }
 
     return <div className="rating">{stars}</div>;
-  }
+  };
 
   const Telephone = ({ telephoneNumber }) => {
     if (!telephoneNumber) return null;
@@ -151,27 +159,37 @@ function Card({ data, indexImg }) {
   };
 
   const Image = ({ rating, name }) => {
-    //console.log(indexImg);
-    const image = data?.photos[indexImg].getUrl({ maxWidth: 400, maxHeight: 300 });
-    setImageSourceUrl(image);
-
     return (
       <div className="relative">
-        <img className="caratula" src={imageSourceUrl} alt={name}/>
+        <img className="caratula" src={imageSourceUrl} alt={name} />
         <Rating className="rating" starCount={rating}></Rating>
       </div>
     );
   };
 
+  const Tags = ({ tags }) => {
+    //console.log("Rendering tags");
+    //console.dir(tags);
+
+    let categories = Array.from({ length: tags.length });
+
+    for (let i = 0; i < tags.length; i++) {
+      categories[i] = (
+        <span key={uuidv4()} className={["tag", tags[i].toLowerCase()].join(" ")}>
+          {tags[i]}
+        </span>
+      );
+    }
+
+    return <div className="tags">{categories}</div>;
+  };
 
   return (
     <>
       <div className="card">
-        <Image
-          rating={data?.rating}
-          description={data?.name}
-        ></Image>
+        <Image rating={data?.rating} description={data?.name}></Image>
         <p className="descripcion">{data?.name}</p>
+        <Tags tags={data?.categories}></Tags>
         <Street url={data?.url} address={data?.address}></Street>
         <Telephone telephoneNumber={data?.telephone}></Telephone>
         <ShareBar></ShareBar>

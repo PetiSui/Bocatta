@@ -63,6 +63,7 @@ function App() {
       rating: addressObject?.rating || "",
       priceLevel: addressObject?.price_level || "",
       totalReviews: addressObject?.user_ratings_total || "",
+      categories: []
     };
     //console.dir(data);
     updateQuery(data);
@@ -100,13 +101,13 @@ function App() {
     setImageIndex(prevIndex => (imageIndex == 9) ? 0 : imageIndex+1)
   }
 
-  function modifyData(id, value) {
+  function modifyData(id, ...value) {
     //TEST FOR BUGS
     console.dir(establishmentData);
     console.log(`ID:${id} with value ${value}`);
     setEstablishmentData((prevState) => ({
       ...prevState,
-      [id] : value,
+      [id] : value, //[...value]
     }));
     console.dir(establishmentData);
   }
