@@ -10,6 +10,23 @@ function CardForm({
   decrementIndex,
   incrementIndex,
 }) {
+  const categorias = [
+    "Almuerzos",
+    "Argentino",
+    "Bocadillos",
+    "Bufffet",
+    "Desayunos",
+    "Hamburguesas",
+    "Horchateria",
+    "Mexicano",
+    "Pizza",
+    "Sushi",
+    "Tapas",
+  ];
+
+  function addCategoria(categoria){
+    console.log(categoria);
+  }
 
   return (
     <>
@@ -18,31 +35,88 @@ function CardForm({
           <button onClick={() => decrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
-          <span>{indexImg}/{data?.photos.length-1}</span>
+          <span>
+            {indexImg + 1}/{data?.photos.length}
+          </span>
           <button onClick={() => incrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
           <input type="file" name="newImage" id="image" />
         </div>
+        <div className="categorias">
+          {categorias.map((categoria) => {
+            return (
+              <div>
+                <input
+                  key={categoria}
+                  type="checkbox"
+                  value={categoria}
+                  name={categoria}
+                  onClick={ () => addCategoria({categoria})}
+                />
+                <label>{categoria}</label>
+              </div>
+            );
+          })}
+        </div>
         <div>
           <label htmlFor="rating">Rating: </label>
-          <input type="text" name="rating" defaultValue={data?.rating} size="4" onChange={(e) => {modifyData("rating", e.target.value.replace(',','.'))}}/>
+          <input
+            type="text"
+            name="rating"
+            defaultValue={data?.rating}
+            size="4"
+            onChange={(e) => {
+              modifyData("rating", e.target.value.replace(",", "."));
+            }}
+          />
         </div>
         <div>
           <label htmlFor="description">Name: </label>
-          <input type="text" name="name" defaultValue={data?.name} size="50" onChange={(e) => {modifyData("name", e.target.value)}}/>
+          <input
+            type="text"
+            name="name"
+            defaultValue={data?.name}
+            size="50"
+            onChange={(e) => {
+              modifyData("name", e.target.value);
+            }}
+          />
         </div>
         <div>
           <label htmlFor="address">Address: </label>
-          <input type="text" name="address" defaultValue={data?.address} size="50" onChange={(e) => {modifyData("address", e.target.value)}} />
+          <input
+            type="text"
+            name="address"
+            defaultValue={data?.address}
+            size="50"
+            onChange={(e) => {
+              modifyData("address", e.target.value);
+            }}
+          />
         </div>
         <div>
           <label htmlFor="telephone">Telephone: </label>
-          <input type="text" name="telephone" defaultValue={data?.telephone} onChange={(e) => {modifyData("telephone", e.target.value)}}/>
+          <input
+            type="text"
+            name="telephone"
+            defaultValue={data?.telephone}
+            onChange={(e) => {
+              modifyData("telephone", e.target.value);
+            }}
+          />
         </div>
         <div>
           <label htmlFor="website">Website: </label>
-          <input type="text" name="website" defaultValue={data?.website} size="35" onChange={(e) => {modifyData("website", e.target.value)}}/>
+          <input
+            type="text"
+            name="website"
+            defaultValue={data?.website}
+            size="35"
+            onChange={(e) => {
+              modifyData("website", e.target.value);
+            }}
+          />
         </div>
         <button className="button_send">ENVIAR</button>
       </div>

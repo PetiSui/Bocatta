@@ -104,6 +104,7 @@ h1 {
 .edit_params{
   display: flex;
   flex-direction: column;
+  width: 75%;
   outline: white solid 2px;
   padding: 1rem;
   outline-offset: 1rem;
@@ -133,12 +134,12 @@ h1 {
   transform: scale(0.8);
 }
 
-/* END CARDFORM CSS */
+.categorias{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: .7rem;
+  gap: .5rem;
+  justify-content: space-between;
+}
 
-/* @media (max-width: 600px) {
-  .params {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-} */
+/* END CARDFORM CSS */

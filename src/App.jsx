@@ -93,11 +93,11 @@ function App() {
   }, []);
 
   function decrementIndex(){
-    setImageIndex((imageIndex == 0) ? 0 : imageIndex-1);
+    setImageIndex( prevIndex => (prevIndex == 0) ? 9 : prevIndex-1);
   }
 
   function incrementIndex(){
-    setImageIndex((imageIndex == 9) ? 0 : imageIndex+1)
+    setImageIndex(prevIndex => (imageIndex == 9) ? 0 : imageIndex+1)
   }
 
   function modifyData(id, value) {
