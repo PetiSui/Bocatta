@@ -66,9 +66,10 @@ function CardForm({
                   key={uuidv4()}
                   type="checkbox"
                   id={categoria}
+                  checked={categoriasSeleccionadas.includes(categoria)}
                   value={categoria}
                   name={categoria}
-                  onClick={() => handleCategorias(categoria)}
+                  onChange={() => handleCategorias(categoria)}
                 />
                 <label key={uuidv4()} htmlFor={categoria}>{categoria}</label>
               </div>
