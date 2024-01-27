@@ -7,10 +7,6 @@ import CardForm from "./components/CardForm.jsx";
 let autoComplete;
 var addressObject;
 
-const searchEstablishment = () => {
-  google.maps.event.trigger(autoComplete, "place_changed");
-};
-
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
   script.type = "text/javascript";
@@ -130,14 +126,6 @@ function App() {
                 placeholder="Nombre"
                 onChange={(e) => setEstablishment(e.target.value)}
               />
-            </div>
-            <div className="submitButton">
-              <button
-                className="buttonSearch"
-                onClick={() => searchEstablishment()}
-              >
-                Buscar
-              </button>
             </div>
           </form>
         </main>

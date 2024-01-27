@@ -18,6 +18,8 @@
   --clr-light-grey: rgb(162, 162, 162);
   --clr-shadow: rgba(208, 208, 208, 0.375);
   --clr-black: rgba(14, 14, 14, 0.855);
+  --clr-links: rgb(23, 105, 153);
+
   --clr-almuerzos:  rgb(246, 228, 69);
   --clr-argentino: rgb(117, 174, 224) ;
   --clr-bocadillos: rgb(237, 178, 105);
@@ -315,7 +317,7 @@ button {
 
 a {
   text-decoration: none;
-  color: rgb(23, 105, 153);
+  color: var(--clr-links);
   font-weight: var(--fw-bold);
   font-size: var(--ff-size-s);
   overflow: hidden;
@@ -438,15 +440,21 @@ a:hover {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --clr-text: rgb(229, 229, 229);
-    --clr-card: rgb(50, 50, 50);
+    --clr-text: rgb(235, 231, 231);
+    --clr-card: rgba(198, 198, 198, 0.804);
     --clr-heart: rgb(237, 41, 15);
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
     --clr-shadow: rgba(0, 40, 80, 0.2);
+    --clr-links: rgb(42, 119, 164);
+    --clr-dark: #171717;
   }
 
   p {
     color: var(--clr-text);
+  }
+
+  .descripcion{
+    color: var(--clr-dark);
   }
 }

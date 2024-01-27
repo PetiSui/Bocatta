@@ -145,7 +145,7 @@ function CardForm({
             }}
           />
         </div>
-        <button className="button_send">ENVIAR</button>
+        <button className="button_send button_search">ENVIAR</button>
       </div>
     </>
   );

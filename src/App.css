@@ -9,15 +9,23 @@
   --fw-bold: 600;
 
   --ff: Roboto, system-ui;
+  --clr-body: rgba(17, 17, 17, 0.793);
+
 }
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 body{
-  height: 100%;
+  min-height: 100%;
   width: auto;
+  margin: 0;
+  padding: 2rem;
+  background-color: var(--clr-body);
 }
 
 p {
@@ -65,27 +73,6 @@ h1 {
   margin-bottom: 4rem;
 }
 
-.buttonSearch {
-  padding: 0.75rem;
-  background-color: rgb(14, 103, 154);
-  border: 0;
-  border-radius: 0.5rem;
-  font-weight: var(--ff-size-l);
-}
-
-.submitButton{
-  display: flex;
-  place-content: center;
-  margin-top: .5rem;
-}
-
-.buttonSearch:hover {
-  background-color: rgb(36, 156, 226);
-  opacity: 0.9;
-  transform: scale(1.1);
-  transition: transform ease-out 150ms;
-}
-
 .tarjeta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
@@ -106,8 +93,8 @@ h1 {
   flex-direction: column;
   width: 75%;
   outline: white solid 2px;
-  padding: 1rem;
-  outline-offset: 1rem;
+  padding: 2rem;
+  /* outline-offset: .5rem; */
   border-radius: 5px;
 }
 
@@ -117,8 +104,15 @@ h1 {
   background-color: rgb(14, 103, 154);
   border: 0;
   border-radius: 0.5rem;
-  font-weight: var(--ff-size-l);
+  font-size: var(--ff-size-m);
+  font-weight: var(--fw-normal);
 }
+
+.button_send:hover{
+  background-color: rgb(30, 155, 228);
+  opacity: 0.9;
+}
+
 
 .button_counter{
   border: 1px solid white;
@@ -143,3 +137,40 @@ h1 {
 }
 
 /* END CARDFORM CSS */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --clr-text: rgb(235, 231, 231);
+    --clr-card: rgba(198, 198, 198, 0.804);
+    --clr-heart: rgb(237, 41, 15);
+    --clr-dark-grey: rgb(80, 78, 78);
+    --clr-light-grey: rgb(162, 162, 162);
+    --clr-shadow: rgba(0, 40, 80, 0.2);
+    --clr-links: rgb(42, 119, 164);
+    --clr-body: rgb(228, 228, 228);
+
+  }
+
+  p {
+    color: var(--clr-text);
+  }
+
+  .edit_params{
+    background-color: var(--clr-card);
+    outline-color: var(--clr-text);
+    outline-offset: -10px;
+  }
+
+  .button_send {
+    color: var(--clr-text);
+  }
+
+  .button_counter{
+    background-color: var(--clr-light-grey);
+    border-color: var(--clr-card);
+  }
+
+  body{
+    background-color: var(--clr-body);
+  }
+}
