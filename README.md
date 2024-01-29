@@ -1,8 +1,23 @@
-# React + Vite
+# Generador de tarjetas para establecimientos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Selecciona cualquier establecimento y genera una tarjeta con la información más relevante que ofrece la [API Autocomplete de Google](https://developers.google.com/maps/documentation/javascript/place-autocomplete?hl=es-419#javascript).
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Vite v.5.0.8
+* React JS v.18.2
+* SWC
+* CSS3
+
+## Librerías
+
+* FontAwesome Icons
+* Librería Autocomplete de Google
+
+## Instalación
+
+    1. Clonar el repositorio
+    2. Obtener tu API Key de Google
+    3. Crea un archivo que contenga la API Key en el directorio **/constants/constants.js**
+    4. Dentro del archivo exporta la API Key de esta manera 
+        ```js export const REACT_APP_GOOGLE_MAPS_KEY = "YOUR API KEY";```
