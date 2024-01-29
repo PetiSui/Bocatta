@@ -17,7 +17,12 @@ Selecciona cualquier establecimento y genera una tarjeta con la información má
 ## Instalación
 
     1. Clonar el repositorio
+    
     2. Obtener tu API Key de Google
+    
     3. Crea un archivo que contenga la API Key en el directorio **/constants/constants.js**
-    4. Dentro del archivo exporta la API Key de esta manera 
-        ```js export const REACT_APP_GOOGLE_MAPS_KEY = "YOUR API KEY";```
+    
+    4. Dentro del archivo exporta la API Key de esta manera: 
+        ```javascript
+        export const REACT_APP_GOOGLE_MAPS_KEY = "YOUR API KEY";
+        ```
