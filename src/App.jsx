@@ -23,6 +23,7 @@ const loadScript = (url, callback) => {
   }
 
   script.src = url;
+  script.async = true;
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -46,9 +47,23 @@ function App() {
     });
   };
 
+  const toDataURL = (url) =>
+    fetch(url, {mode: 'no-cors'})
+      .then((response) => response.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          })
+      ).catch( err => console.log(err));
+
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
     //console.dir(addressObject);
+
     let data = {
       address: addressObject?.formatted_address || "",
       name: addressObject?.name || "",
@@ -59,7 +74,7 @@ function App() {
       rating: addressObject?.rating || "",
       priceLevel: addressObject?.price_level || "",
       totalReviews: addressObject?.user_ratings_total || "",
-      categories: []
+      categories: [],
     };
     //console.dir(data);
     updateQuery(data);
@@ -76,12 +91,13 @@ function App() {
   window.initMap = function () {
     // JS API is loaded and available
     // console.log("LOADED LIBRARY");
+    handleScriptLoad(setEstablishmentData, autoCompleteRef);
   };
 
   useEffect(() => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB08y8T9MQJpbtkr0sW8FdncZzsBewqqM8&libraries=places&callback=initMap`,
-      () => handleScriptLoad(setEstablishmentData, autoCompleteRef)
+      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB08y8T9MQJpbtkr0sW8FdncZzsBewqqM8&libraries=places&callback=initMap&loading=async`,
+      () => {}
     );
 
     return () => {
@@ -89,21 +105,22 @@ function App() {
     };
   }, []);
 
-  function decrementIndex(){
-    setImageIndex( prevIndex => (prevIndex == 0) ? 9 : prevIndex-1);
+  function decrementIndex() {
+    setImageIndex((prevIndex) => (prevIndex == 0 ? establishmentData?.photos?.length-1 : prevIndex - 1));
   }
 
-  function incrementIndex(){
-    setImageIndex(prevIndex => (imageIndex == 9) ? 0 : imageIndex+1)
+  function incrementIndex() {
+    setImageIndex((prevIndex) => (imageIndex == establishmentData?.photos?.length-1 ? 0 : imageIndex + 1));
   }
 
   function modifyData(id, ...value) {
     //TEST FOR BUGS
+    if(id === 'photos') value = value[0];
     console.dir(establishmentData);
     console.log(`ID:${id} with value ${value}`);
     setEstablishmentData((prevState) => ({
       ...prevState,
-      [id] : value, //[...value]
+      [id]: value, //[...value]
     }));
     console.dir(establishmentData);
   }
@@ -131,7 +148,6 @@ function App() {
         </main>
 
         <div className="tarjeta">
-
           {Object.entries(establishmentData).length != 0 ? (
             <>
               <Card data={establishmentData} indexImg={imageIndex}></Card>
@@ -141,6 +157,7 @@ function App() {
                 indexImg={imageIndex}
                 decrementIndex={decrementIndex}
                 incrementIndex={incrementIndex}
+                setImageIndex={setImageIndex}
               ></CardForm>
             </>
           ) : (

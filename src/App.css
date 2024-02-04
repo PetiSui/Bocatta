@@ -10,7 +10,11 @@
 
   --ff: Roboto, system-ui;
   --clr-body: rgba(17, 17, 17, 0.793);
+}
 
+*{
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -20,12 +24,18 @@ html {
   margin: 0;
 }
 
-body{
+body {
   min-height: 100%;
-  width: auto;
+  width: 100%;
   margin: 0;
   padding: 2rem;
   background-color: var(--clr-body);
+}
+
+input,
+textarea {
+  width: 100%;
+  display: block;
 }
 
 p {
@@ -41,7 +51,7 @@ label {
 }
 
 h1 {
-  font-size: max(4dvw, calc(var(--ff-size-xl)*1.1));
+  font-size: max(4dvw, calc(var(--ff-size-xl) * 1.1));
   font-weight: var(--fw-bold);
   font-family: var(--ff);
   text-wrap: balance;
@@ -60,13 +70,15 @@ h1 {
   place-items: center;
   flex-direction: row;
   gap: 0.7rem;
+  margin-top: 2rem;
 }
 
 .inputName {
   border: 1px solid grey;
   border-radius: 0.3rem;
-  width: clamp(50ch, 70ch, 80dvh);
+  width: clamp(50ch, 65ch, 80dvh);
   height: 4ch;
+  padding: .3rem;
 }
 
 .main {
@@ -76,24 +88,25 @@ h1 {
 .tarjeta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  /* grid-template-columns: repeat(2, 1fr); */
+  /* grid-template-columns: auto; */
   place-items: center;
   gap: 3rem;
 }
 
 /* CARDFORM CSS */
-.update_image{
+.update_image {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
 
-.edit_params{
+.edit_params {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  gap: .5rem;
+  /* width: 75%; */
   outline: white solid 2px;
-  padding: 2rem;
+  padding: 1.5rem;
   /* outline-offset: .5rem; */
   border-radius: 5px;
 }
@@ -108,32 +121,44 @@ h1 {
   font-weight: var(--fw-normal);
 }
 
-.button_send:hover{
+.button_send:hover {
   background-color: rgb(30, 155, 228);
   opacity: 0.9;
 }
 
-
-.button_counter{
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: .3rem;
+.img_selector {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.button_counter:hover{
+.button_counter {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.3rem;
+}
+
+.button_counter:hover {
   background-color: #807f7f;
 }
 
-.button_counter:active{
+.button_counter:active {
   transform: scale(0.8);
 }
 
-.categorias{
+.categorias {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: .7rem;
-  gap: .5rem;
+  margin-bottom: 0.7rem;
+  gap: 0.5rem;
   justify-content: space-between;
+}
+
+.categorias > div{
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  align-items: center;
 }
 
 /* END CARDFORM CSS */
@@ -148,14 +173,13 @@ h1 {
     --clr-shadow: rgba(0, 40, 80, 0.2);
     --clr-links: rgb(42, 119, 164);
     --clr-body: rgb(228, 228, 228);
-
   }
 
   p {
     color: var(--clr-text);
   }
 
-  .edit_params{
+  .edit_params {
     background-color: var(--clr-card);
     outline-color: var(--clr-text);
     outline-offset: -10px;
@@ -165,12 +189,68 @@ h1 {
     color: var(--clr-text);
   }
 
-  .button_counter{
+  .button_counter {
     background-color: var(--clr-light-grey);
     border-color: var(--clr-card);
   }
 
-  body{
+  /* body{
     background-color: var(--clr-body);
+  } */
+}
+
+@media (max-width: 650px) {
+  .params {
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    gap: .2rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .inputName {
+    width: 100%;
+  }
+
+  .edit_params {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+
+  .edit_params > div:not(.categorias) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 80vw;
+  }
+  
+
+  .update_image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .tarjeta {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .button_send{
+    max-width: 80%;
+    align-self: center;
+  }
+
+  .app{
+    width: 100%;
   }
 }

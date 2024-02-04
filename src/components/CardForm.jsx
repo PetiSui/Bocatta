@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import fileTypeChecker from "file-type-checker";
 
 function CardForm({
   data,
@@ -10,6 +11,7 @@ function CardForm({
   indexImg,
   decrementIndex,
   incrementIndex,
+  setImageIndex
 }) {
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
 
@@ -43,10 +45,53 @@ function CardForm({
         ]);
   }
 
-  return (
-    <>
-      <div className="edit_params">
-        <div className="update_image">
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+
+  async function addImage(image) {
+    let base64Image = await toBase64(image)
+      .then((result) => modifyData("photos", [...data.photos, result]))
+      .catch((error) => console.log(error));
+  }
+
+  function handleFileUpload(event) {
+    const types = ["jpeg", "png", "gif"];
+    const file = event.target.files[0];
+    try {
+      if (file) {
+        const fileReader = new FileReader();
+
+        fileReader.onload = async () => {
+          const isImage = fileTypeChecker.validateFileType(
+            fileReader.result,
+            types
+          );
+
+          if (!isImage) {
+            alert(
+              "Solo estám soportados los formatos .jpeg, .png y .gif. Intentelo de nuevo."
+            );
+          }
+          await addImage(file);
+          setImageIndex(() => data?.photos.length)
+        };
+
+        fileReader.readAsArrayBuffer(file);
+      }
+    } catch (err) {
+      console.error("Error: ", err.message);
+    }
+  }
+
+  const UpdateImage = () => {
+    return (
+      <div className="update_image">
+        <div className="img_selector">
           <button onClick={() => decrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
@@ -56,26 +101,22 @@ function CardForm({
           <button onClick={() => incrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
-          <input type="file" name="newImage" id="image" />
         </div>
-        <div className="categorias">
-          {categorias.map((categoria) => {
-            return (
-              <div key={uuidv4()}>
-                <input
-                  key={uuidv4()}
-                  type="checkbox"
-                  id={categoria}
-                  checked={categoriasSeleccionadas.includes(categoria)}
-                  value={categoria}
-                  name={categoria}
-                  onChange={() => handleCategorias(categoria)}
-                />
-                <label key={uuidv4()} htmlFor={categoria}>{categoria}</label>
-              </div>
-            );
-          })}
-        </div>
+        <input
+          type="file"
+          name="image"
+          id="image"
+          accept=".gif,.jpeg,.png"
+          onChange={(e) => handleFileUpload(e)}
+        />
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className="edit_params">
+        <UpdateImage></UpdateImage>
         <div>
           <label htmlFor="rating">Rating: </label>
           <input

@@ -8,7 +8,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocation } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import "./Card.css";
 
 function Card({ data, indexImg }) {
@@ -17,10 +17,13 @@ function Card({ data, indexImg }) {
   const [imageSourceUrl, setImageSourceUrl] = useState("");
   //console.log(data);
   useEffect(() => {
-    const image = data?.photos[indexImg].getUrl({
-      maxWidth: 400,
-      maxHeight: 300,
-    });
+    const image =
+      indexImg < 10
+        ? data?.photos[indexImg].getUrl({
+            maxWidth: 400,
+            maxHeight: 300,
+          })
+        : data?.photos[indexImg];
     setImageSourceUrl(image);
   }, [indexImg]);
 
@@ -134,6 +137,7 @@ function Card({ data, indexImg }) {
           ></FontAwesomeIcon>
         </button>
         <button
+          className="like_button"
           onClick={() => {
             setLiked(!liked);
           }}
@@ -175,7 +179,10 @@ function Card({ data, indexImg }) {
 
     for (let i = 0; i < tags.length; i++) {
       categories[i] = (
-        <span key={uuidv4()} className={["tag", tags[i].toLowerCase()].join(" ")}>
+        <span
+          key={uuidv4()}
+          className={["tag", tags[i].toLowerCase()].join(" ")}
+        >
           {tags[i]}
         </span>
       );
