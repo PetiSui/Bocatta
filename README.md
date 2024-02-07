@@ -13,6 +13,8 @@ Selecciona cualquier establecimento y genera una tarjeta con la información má
 
 * FontAwesome Icons
 * Librería Autocomplete de Google
+* File-Type-Checker
+* UUID
 
 ## Instalación
 
