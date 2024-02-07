@@ -4,6 +4,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
 import fileTypeChecker from "file-type-checker";
+import axios from "axios";
 
 function CardForm({
   data,
@@ -11,7 +12,7 @@ function CardForm({
   indexImg,
   decrementIndex,
   incrementIndex,
-  setImageIndex
+  setImageIndex,
 }) {
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
 
@@ -78,7 +79,7 @@ function CardForm({
             );
           }
           await addImage(file);
-          setImageIndex(() => data?.photos.length)
+          setImageIndex(() => data?.photos.length);
         };
 
         fileReader.readAsArrayBuffer(file);
@@ -112,6 +113,17 @@ function CardForm({
       </div>
     );
   };
+
+  async function handleSubmitData() {
+    const baseURL = "http://localhost:4000";
+    const postData = {
+      ...data,
+      photos: data?.photos[indexImg]
+    }
+    await axios.post(`${baseURL}/cards`, JSON.stringify(postData))
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <>
@@ -186,7 +198,12 @@ function CardForm({
             }}
           />
         </div>
-        <button className="button_send button_search">ENVIAR</button>
+        <button
+          onClick={() => handleSubmitData()}
+          className="button_send button_search"
+        >
+          ENVIAR
+        </button>
       </div>
     </>
   );

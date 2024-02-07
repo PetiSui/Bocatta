@@ -70,7 +70,10 @@ function App() {
       telephone: addressObject?.formatted_phone_number || "",
       url: addressObject?.url || "",
       website: addressObject?.website || "",
-      photos: addressObject?.photos || [],
+      photos: addressObject?.photos.map( photo => photo.getUrl({
+        maxWidth: 400,
+        maxHeight: 300,
+      })) || [],
       rating: addressObject?.rating || "",
       priceLevel: addressObject?.price_level || "",
       totalReviews: addressObject?.user_ratings_total || "",

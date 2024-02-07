@@ -97,18 +97,22 @@ h1 {
 .update_image {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: .5rem;
 }
 
 .edit_params {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: .75rem;
   /* width: 75%; */
   outline: white solid 2px;
   padding: 1.5rem;
   /* outline-offset: .5rem; */
   border-radius: 5px;
+}
+
+.edit_params > div > input {
+  padding: .2rem;
 }
 
 .button_send {

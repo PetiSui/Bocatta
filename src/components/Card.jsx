@@ -17,14 +17,15 @@ function Card({ data, indexImg }) {
   const [imageSourceUrl, setImageSourceUrl] = useState("");
   //console.log(data);
   useEffect(() => {
-    const image =
-      indexImg < 10
-        ? data?.photos[indexImg].getUrl({
-            maxWidth: 400,
-            maxHeight: 300,
-          })
-        : data?.photos[indexImg];
-    setImageSourceUrl(image);
+    // const image =
+    //   indexImg < 10
+    //     ? data?.photos[indexImg].getUrl({
+    //         maxWidth: 400,
+    //         maxHeight: 300,
+    //       })
+    //     : data?.photos[indexImg];
+    //setImageSourceUrl(image);
+    setImageSourceUrl(data?.photos[indexImg]);
   }, [indexImg]);
 
   if (data.length === 0) {
