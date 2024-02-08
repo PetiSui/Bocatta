@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Card from "./components/Card.jsx";
-import "./App.css";
+import "./styles/App.css";
 import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 import CardForm from "./components/CardForm.jsx";
 

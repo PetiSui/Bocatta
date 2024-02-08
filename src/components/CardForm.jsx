@@ -118,9 +118,10 @@ function CardForm({
     const baseURL = "http://localhost:4000";
     const postData = {
       ...data,
-      photos: data?.photos[indexImg]
-    }
-    await axios.post(`${baseURL}/cards`, JSON.stringify(postData))
+      photos: data?.photos[indexImg],
+    };
+    await axios
+      .post(`${baseURL}/cards`, JSON.stringify(postData))
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
@@ -129,8 +130,29 @@ function CardForm({
     <>
       <div className="edit_params">
         <UpdateImage></UpdateImage>
+        <div className="categorias">
+          {categorias.map((categoria) => {
+            return (
+              <div key={uuidv4()}>
+                <input
+                  key={uuidv4()}
+                  type="checkbox"
+                  id={categoria}
+                  title={categoria}
+                  checked={categoriasSeleccionadas.includes(categoria)}
+                  value={categoria}
+                  name={categoria}
+                  onChange={() => handleCategorias(categoria)}
+                />
+                <label key={uuidv4()} htmlFor={categoria}>
+                  {categoria}
+                </label>
+              </div>
+            );
+          })}
+        </div>
         <div>
-          <label htmlFor="rating">Rating: </label>
+          <label htmlFor="rating">Valoración: </label>
           <input
             type="text"
             name="rating"
@@ -144,7 +166,7 @@ function CardForm({
           />
         </div>
         <div>
-          <label htmlFor="description">Name: </label>
+          <label htmlFor="description">Nombre: </label>
           <input
             type="text"
             name="description"
@@ -158,7 +180,7 @@ function CardForm({
           />
         </div>
         <div>
-          <label htmlFor="address">Address: </label>
+          <label htmlFor="address">Dirección: </label>
           <input
             type="text"
             name="address"
@@ -172,7 +194,7 @@ function CardForm({
           />
         </div>
         <div>
-          <label htmlFor="telephone">Telephone: </label>
+          <label htmlFor="telephone">Teléfono: </label>
           <input
             type="text"
             name="telephone"
@@ -185,7 +207,7 @@ function CardForm({
           />
         </div>
         <div>
-          <label htmlFor="website">Website: </label>
+          <label htmlFor="website">Sitio Web: </label>
           <input
             type="text"
             name="website"
