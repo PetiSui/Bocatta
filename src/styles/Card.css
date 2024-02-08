@@ -25,9 +25,9 @@
   --clr-argentino: rgb(117, 174, 224) ;
   --clr-bocadillos: rgb(237, 178, 105);
   --clr-buffet: rgb(76, 219, 204);
-  --clr-desayunos: rgb(238, 179, 154);
+  --clr-horchateria: rgb(238, 179, 154);
   --clr-hamburguesas: rgb(250, 128, 128);
-  --clr-horchateria: rgb(144, 217, 75);
+  --clr-desayunos: rgb(110, 165, 254);
   --clr-mexicano: rgb(83, 197, 87);
   --clr-pizza: rgb(245, 92, 65);
   --clr-sushi: rgb(38, 166, 154);
@@ -272,7 +272,7 @@ button {
   color: var(--clr-black);
   font-weight: 700;
   /* vertical-align: middle; */
-  font-size: max(var(--ff-size-s), calc(1vw));
+  font-size: calc(var(--ff-size-s) + 0.05rem);
   line-height: 3ch;
   padding-inline: .5rem;
   padding-block: .25rem;
