@@ -133,7 +133,7 @@ function CardForm({
       .catch((err) => console.log(err));
   }
 
-  function handleOnDragExit(e){
+  function handleOnDragExit(e) {
     e.preventDefault();
     e.stopPropagation();
     setIsDragged(false);
@@ -152,109 +152,11 @@ function CardForm({
     setIsDragged(true);
   }
 
-  function handleOnDragEnter(e){
+  function handleOnDragEnter(e) {
     e.preventDefault();
     e.stopPropagation();
     setIsDragged(true);
   }
-
-  const EditParams = () => {
-    return (
-      <>
-        <UpdateImage></UpdateImage>
-        <div className="categorias">
-          {categorias.map((categoria) => {
-            return (
-              <div key={categoria}>
-                <input
-                  type="checkbox"
-                  id={categoria}
-                  title={categoria}
-                  checked={categoriasSeleccionadas.includes(categoria)}
-                  value={categoria}
-                  name={categoria}
-                  onChange={() => handleCategorias(categoria)}
-                />
-                <label htmlFor={categoria}>
-                  {categoria}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-        <div>
-          <label htmlFor="rating">Valoración: </label>
-          <input
-            type="text"
-            name="rating"
-            id="rating"
-            defaultValue={data?.rating}
-            size="4"
-            onChange={(e) => {
-              modifyData("rating", e.target.value.replace(",", "."));
-            }}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Nombre: </label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            defaultValue={data?.name}
-            size="50"
-            onChange={(e) => {
-              modifyData("name", e.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <label htmlFor="address">Dirección: </label>
-          <input
-            type="text"
-            name="address"
-            id="address"
-            defaultValue={data?.address}
-            size="50"
-            onChange={(e) => {
-              modifyData("address", e.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <label htmlFor="telephone">Teléfono: </label>
-          <input
-            type="text"
-            name="telephone"
-            id="telephone"
-            defaultValue={data?.telephone}
-            onChange={(e) => {
-              modifyData("telephone", e.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <label htmlFor="website">Sitio Web: </label>
-          <input
-            type="text"
-            name="website"
-            id="website"
-            defaultValue={data?.website}
-            size="35"
-            onChange={(e) => {
-              modifyData("website", e.target.value);
-            }}
-          />
-        </div>
-        <button
-          onClick={() => handleSubmitData()}
-          className="button_send button_search"
-        >
-          ENVIAR
-        </button>
-      </>
-    );
-  };
 
   return (
     <>
@@ -265,7 +167,101 @@ function CardForm({
         //onDragOver={handleOnDragOver}
         //onDragLeave={handleOnDragExit}
       >
-        {!isDragged ? <EditParams></EditParams> : <p className="upload_text">Suelta para subir</p>}
+        {isDragged ? (
+          <p className="upload_text">Suelta para subir</p>
+        ) : (
+          <>
+            <UpdateImage></UpdateImage>
+            <div className="categorias">
+              {categorias.map((categoria) => {
+                return (
+                  <div key={categoria}>
+                    <input
+                      type="checkbox"
+                      id={categoria}
+                      title={categoria}
+                      checked={categoriasSeleccionadas.includes(categoria)}
+                      value={categoria}
+                      name={categoria}
+                      onChange={() => handleCategorias(categoria)}
+                    />
+                    <label htmlFor={categoria}>{categoria}</label>
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              <label htmlFor="rating">Valoración: </label>
+              <input
+                type="text"
+                name="rating"
+                id="rating"
+                defaultValue={data?.rating}
+                size="4"
+                onChange={(e) => {
+                  modifyData("rating", e.target.value.replace(",", "."));
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Nombre: </label>
+              <input
+                type="text"
+                name="description"
+                id="description"
+                defaultValue={data?.name}
+                size="50"
+                onChange={(e) => {
+                  modifyData("name", e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="address">Dirección: </label>
+              <input
+                type="text"
+                name="address"
+                id="address"
+                defaultValue={data?.address}
+                size="50"
+                onChange={(e) => {
+                  modifyData("address", e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="telephone">Teléfono: </label>
+              <input
+                type="text"
+                name="telephone"
+                id="telephone"
+                defaultValue={data?.telephone}
+                onChange={(e) => {
+                  modifyData("telephone", e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="website">Sitio Web: </label>
+              <input
+                type="text"
+                name="website"
+                id="website"
+                defaultValue={data?.website}
+                size="35"
+                onChange={(e) => {
+                  modifyData("website", e.target.value);
+                }}
+              />
+            </div>
+            <button
+              onClick={() => handleSubmitData()}
+              className="button_send button_search"
+            >
+              ENVIAR
+            </button>
+          </>
+        )}
       </div>
     </>
   );
