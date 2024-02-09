@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
 import fileTypeChecker from "file-type-checker";
 import axios from "axios";
 
@@ -15,6 +14,7 @@ function CardForm({
   setImageIndex,
 }) {
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
+  const [isDragged, setIsDragged] = useState(false);
 
   useEffect(() => {
     console.log(categoriasSeleccionadas);
@@ -60,9 +60,9 @@ function CardForm({
       .catch((error) => console.log(error));
   }
 
-  function handleFileUpload(event) {
+  function handleFileUpload(file) {
     const types = ["jpeg", "png", "gif"];
-    const file = event.target.files[0];
+    // const file = event.target.files[0];
     try {
       if (file) {
         const fileReader = new FileReader();
@@ -75,8 +75,9 @@ function CardForm({
 
           if (!isImage) {
             alert(
-              "Solo estám soportados los formatos .jpeg, .png y .gif. Intentelo de nuevo."
+              "Solo estan soportados los formatos .jpeg, .png y .gif. Intentelo de nuevo."
             );
+            return;
           }
           await addImage(file);
           setImageIndex(() => data?.photos.length);
@@ -92,6 +93,19 @@ function CardForm({
   const UpdateImage = () => {
     return (
       <div className="update_image">
+        <div className="update">
+          <label htmlFor="image" className="image_text">
+            Subir imagen:
+          </label>
+          <input
+            type="file"
+            name="image"
+            title="Subir un archivo"
+            id="image"
+            accept=".gif,.jpeg,.png"
+            onChange={(e) => handleFileUpload(e.target.files[0])}
+          />
+        </div>
         <div className="img_selector">
           <button onClick={() => decrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowLeft} />
@@ -103,13 +117,6 @@ function CardForm({
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
-        <input
-          type="file"
-          name="image"
-          id="image"
-          accept=".gif,.jpeg,.png"
-          onChange={(e) => handleFileUpload(e)}
-        />
       </div>
     );
   };
@@ -126,16 +133,40 @@ function CardForm({
       .catch((err) => console.log(err));
   }
 
-  return (
-    <>
-      <div className="edit_params">
+  function handleOnDragExit(e){
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragged(false);
+  }
+
+  function handleOnDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    handleFileUpload(e.dataTransfer.files[0]);
+    setIsDragged(false);
+  }
+
+  function handleOnDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragged(true);
+  }
+
+  function handleOnDragEnter(e){
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragged(true);
+  }
+
+  const EditParams = () => {
+    return (
+      <>
         <UpdateImage></UpdateImage>
         <div className="categorias">
           {categorias.map((categoria) => {
             return (
-              <div key={uuidv4()}>
+              <div key={categoria}>
                 <input
-                  key={uuidv4()}
                   type="checkbox"
                   id={categoria}
                   title={categoria}
@@ -144,7 +175,7 @@ function CardForm({
                   name={categoria}
                   onChange={() => handleCategorias(categoria)}
                 />
-                <label key={uuidv4()} htmlFor={categoria}>
+                <label htmlFor={categoria}>
                   {categoria}
                 </label>
               </div>
@@ -157,7 +188,6 @@ function CardForm({
             type="text"
             name="rating"
             id="rating"
-            key="rating"
             defaultValue={data?.rating}
             size="4"
             onChange={(e) => {
@@ -171,7 +201,6 @@ function CardForm({
             type="text"
             name="description"
             id="description"
-            key="description"
             defaultValue={data?.name}
             size="50"
             onChange={(e) => {
@@ -185,7 +214,6 @@ function CardForm({
             type="text"
             name="address"
             id="address"
-            key="address"
             defaultValue={data?.address}
             size="50"
             onChange={(e) => {
@@ -199,7 +227,6 @@ function CardForm({
             type="text"
             name="telephone"
             id="telephone"
-            key="telephone"
             defaultValue={data?.telephone}
             onChange={(e) => {
               modifyData("telephone", e.target.value);
@@ -212,7 +239,6 @@ function CardForm({
             type="text"
             name="website"
             id="website"
-            key="website"
             defaultValue={data?.website}
             size="35"
             onChange={(e) => {
@@ -226,6 +252,20 @@ function CardForm({
         >
           ENVIAR
         </button>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <div
+        className={`edit_params ${isDragged ? "hover_upload_file" : ""}`}
+        //onDrop={handleOnDrop}
+        //onDragEnter={handleOnDragEnter}
+        //onDragOver={handleOnDragOver}
+        //onDragLeave={handleOnDragExit}
+      >
+        {!isDragged ? <EditParams></EditParams> : <p className="upload_text">Suelta para subir</p>}
       </div>
     </>
   );

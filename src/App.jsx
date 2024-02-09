@@ -62,7 +62,7 @@ function App() {
 
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
-    //console.dir(addressObject);
+    console.dir(addressObject);
 
     let data = {
       address: addressObject?.formatted_address || "",
@@ -79,7 +79,7 @@ function App() {
       totalReviews: addressObject?.user_ratings_total || "",
       categories: [],
     };
-    //console.dir(data);
+    console.dir(data);
     updateQuery(data);
     setEstablishment(data?.address);
   };
