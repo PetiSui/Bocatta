@@ -162,10 +162,10 @@ function CardForm({
     <>
       <div
         className={`edit_params ${isDragged ? "hover_upload_file" : ""}`}
-        //onDrop={handleOnDrop}
-        //onDragEnter={handleOnDragEnter}
-        //onDragOver={handleOnDragOver}
-        //onDragLeave={handleOnDragExit}
+        onDrop={handleOnDrop}
+        onDragEnter={handleOnDragEnter}
+        onDragOver={handleOnDragOver}
+        onDragLeave={handleOnDragExit}
       >
         {isDragged ? (
           <p className="upload_text">Suelta para subir</p>

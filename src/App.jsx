@@ -119,13 +119,13 @@ function App() {
   function modifyData(id, ...value) {
     //TEST FOR BUGS
     if(id === 'photos') value = value[0];
-    console.dir(establishmentData);
-    console.log(`ID:${id} with value ${value}`);
+    //console.dir(establishmentData);
+    //console.log(`ID:${id} with value ${value}`);
     setEstablishmentData((prevState) => ({
       ...prevState,
       [id]: value, //[...value]
     }));
-    console.dir(establishmentData);
+    //console.dir(establishmentData);
   }
 
   return (
