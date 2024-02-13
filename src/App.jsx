@@ -67,6 +67,7 @@ function App() {
     let data = {
       address: addressObject?.formatted_address || "",
       name: addressObject?.name || "",
+      id: addressObject?.reference || "unknown",
       telephone: addressObject?.formatted_phone_number || "",
       url: addressObject?.url || "",
       website: addressObject?.website || "",
