@@ -1,6 +1,4 @@
 import React from 'react'
-import Rating from './Rating';
-import { Children } from 'react';
 
 
 const Image = ({ description, imageSourceUrl, children }) => {

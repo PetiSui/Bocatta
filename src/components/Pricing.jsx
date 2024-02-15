@@ -4,7 +4,7 @@ import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from 'uuid';
 
 const Pricing = ({ priceLevel }) => {
-  if (!priceLevel) return null;
+  if (!priceLevel || priceLevel == "") return null;
 
   let MAX_PRICE = 3;
   let pricing = parseInt(priceLevel);

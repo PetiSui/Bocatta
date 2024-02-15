@@ -3,6 +3,7 @@ import Card from "./components/Card.jsx";
 import "./styles/App.css";
 import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 import CardForm from "./components/CardForm.jsx";
+import NoImage from './img/noimage.webp';
 
 let autoComplete;
 var addressObject;
@@ -48,7 +49,7 @@ function App() {
   };
 
   const toDataURL = (url) =>
-    fetch(url, {mode: 'no-cors'})
+    fetch(url, { mode: "no-cors" })
       .then((response) => response.blob())
       .then(
         (blob) =>
@@ -58,38 +59,37 @@ function App() {
             reader.onerror = reject;
             reader.readAsDataURL(blob);
           })
-      ).catch( err => console.log(err));
+      )
+      .catch((err) => console.log(err));
 
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
     console.dir(addressObject);
-
-    let data = {
-      address: addressObject?.formatted_address || "",
-      name: addressObject?.name || "",
-      id: addressObject?.reference || "unknown",
-      telephone: addressObject?.formatted_phone_number || "",
-      url: addressObject?.url || "",
-      website: addressObject?.website || "",
-      photos: addressObject?.photos.map( photo => photo.getUrl({
-        maxWidth: 400,
-        maxHeight: 300,
-      })) || [],
-      rating: addressObject?.rating || "",
-      priceLevel: addressObject?.price_level || "",
-      totalReviews: addressObject?.user_ratings_total || "",
-      categories: [],
-    };
-    console.dir(data);
-    updateQuery(data);
-    setEstablishment(data?.address);
+    if (addressObject?.reference != null) {
+      let data = {
+        address: addressObject?.formatted_address || "",
+        name: addressObject?.name || "",
+        id: addressObject?.reference || "unknown",
+        telephone: addressObject?.formatted_phone_number || "",
+        url: addressObject?.url || "",
+        website: addressObject?.website || "",
+        photos:
+          addressObject?.photos?.map((photo) =>
+            photo.getUrl({
+              maxWidth: 400,
+              maxHeight: 300,
+            })
+          ) || [NoImage],
+        rating: addressObject?.rating || "",
+        priceLevel: addressObject?.price_level || "",
+        totalReviews: addressObject?.user_ratings_total || "",
+        categories: [],
+      };
+      console.dir(data);
+      updateQuery(data);
+      setEstablishment(data?.address);
+    }
   };
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    handlePlaceSelect(setEstablishmentData);
-  }
 
   // Attach your callback function to the `window` object
   window.initMap = function () {
@@ -109,19 +109,28 @@ function App() {
     };
   }, []);
 
+  function handleSubmit(e){
+    e.preventDefault();
+    return false;
+  }
+
   function decrementIndex() {
-    setImageIndex((prevIndex) => (prevIndex == 0 ? establishmentData?.photos?.length-1 : prevIndex - 1));
+    setImageIndex((prevIndex) =>
+      prevIndex == 0 ? establishmentData?.photos?.length - 1 : prevIndex - 1
+    );
   }
 
   function incrementIndex() {
-    setImageIndex((prevIndex) => (imageIndex == establishmentData?.photos?.length-1 ? 0 : imageIndex + 1));
+    setImageIndex((prevIndex) =>
+      imageIndex == establishmentData?.photos?.length - 1 ? 0 : imageIndex + 1
+    );
   }
 
   function modifyData(id, ...value) {
     //TEST FOR BUGS
-    if(id === 'photos') value = value[0];
+    if (id != "categories") value = value[0];
     //console.dir(establishmentData);
-    //console.log(`ID:${id} with value ${value}`);
+    // console.log(`ID:${id} with value ${value}`);
     setEstablishmentData((prevState) => ({
       ...prevState,
       [id]: value, //[...value]
@@ -133,7 +142,7 @@ function App() {
     <>
       <div className="app">
         <main className="main">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <h1>Inserte establecimiento</h1>
             <div className="params">
               <label htmlFor="nombre">Nombre: </label>
