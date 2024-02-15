@@ -184,8 +184,7 @@ input[type='file'] {
 }
 
 .image_text{
-  font-size: var(--ff-size-s);
-  /* text-wrap: nowrap; */
+  font-size: calc(var(--ff-size-m) * 0.9);
 }
 
 .update{
@@ -199,6 +198,35 @@ input[type='file'] {
 .upload_text{
   font-size: var(--ff-size-xl);
   color: var(--clr-card);
+}
+
+.image_ratings, .contact_info{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.image_ratings > div{
+  flex: 1;
+}
+
+.contact_info > div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.contact_info > div:nth-child(2){
+  flex: 1;
+}
+
+#telephone{
+  min-width: 16ch;
+}
+
+#website{
+  min-width: 32ch;
 }
 
 @keyframes pulse {
@@ -290,10 +318,10 @@ input[type='file'] {
     gap: 3rem;
   }
 
-  .button_send{
+  /* .button_send{
     max-width: 80%;
     align-self: center;
-  }
+  } */
 
   .app{
     width: 100%;

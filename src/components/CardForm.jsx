@@ -190,18 +190,33 @@ function CardForm({
                 );
               })}
             </div>
-            <div>
-              <label htmlFor="rating">Valoración: </label>
-              <input
-                type="text"
-                name="rating"
-                id="rating"
-                defaultValue={data?.rating}
-                size="4"
-                onChange={(e) => {
-                  modifyData("rating", e.target.value.replace(",", "."));
-                }}
-              />
+            <div className="image_ratings">
+              <div>
+                <label htmlFor="rating">Valoración: </label>
+                <input
+                  type="text"
+                  name="rating"
+                  id="rating"
+                  defaultValue={data?.rating}
+                  size="4"
+                  onChange={(e) => {
+                    modifyData("rating", e.target.value.replace(",", "."));
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="rating">Precio: </label>
+                <input
+                  type="number"
+                  name="pricing"
+                  id="pricing"
+                  defaultValue={data?.priceLevel}
+                  size="4"
+                  onChange={(e) => {
+                    modifyData("priceLevel", e.target.value);
+                  }}
+                />
+              </div>
             </div>
             <div>
               <label htmlFor="description">Nombre: </label>
@@ -229,30 +244,31 @@ function CardForm({
                 }}
               />
             </div>
-            <div>
-              <label htmlFor="telephone">Teléfono: </label>
-              <input
-                type="text"
-                name="telephone"
-                id="telephone"
-                defaultValue={data?.telephone}
-                onChange={(e) => {
-                  modifyData("telephone", e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="website">Sitio Web: </label>
-              <input
-                type="text"
-                name="website"
-                id="website"
-                defaultValue={data?.website}
-                size="35"
-                onChange={(e) => {
-                  modifyData("website", e.target.value);
-                }}
-              />
+            <div className="contact_info">
+              <div>
+                <label htmlFor="telephone">Teléfono: </label>
+                <input
+                  type="text"
+                  name="telephone"
+                  id="telephone"
+                  defaultValue={data?.telephone}
+                  onChange={(e) => {
+                    modifyData("telephone", e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="website">Sitio Web: </label>
+                <input
+                  type="text"
+                  name="website"
+                  id="website"
+                  defaultValue={data?.website}
+                  onChange={(e) => {
+                    modifyData("website", e.target.value);
+                  }}
+                />
+              </div>
             </div>
             <button
               onClick={() => handleSubmitData()}
