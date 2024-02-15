@@ -6,6 +6,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 
 function share(link, name, address) {
+
   let shareData = {
     title: name,
     text: address,
@@ -20,9 +21,19 @@ function share(link, name, address) {
   }
 }
 
-const ShareBar = ({ url, website, name, address }) => {
-  let [liked, setLiked] = useState();
+
+
+const ShareBar = ({ url, website, name, address, id }) => {
+  const initialLike = localStorage?.getItem(id) || null;
+  console.log(initialLike);
+  let [liked, setLiked] = useState(initialLike);
   //TODO: UseEffect to load localStorage liked
+
+  const handleLiked = () => {
+    setLiked((prevLiked) => !prevLiked);
+    localStorage.setItem(id, liked)
+  }
+
   return (
     <div className="buttons">
       <button
@@ -51,7 +62,8 @@ const ShareBar = ({ url, website, name, address }) => {
         title="Me gusta"
         className="like_button"
         onClick={() => {
-          setLiked((prevLiked) => !prevLiked);
+          // setLiked((prevLiked) => !prevLiked);
+          handleLiked();
         }}
       >
         {!liked ? (

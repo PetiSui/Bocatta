@@ -100,7 +100,7 @@ function App() {
 
   useEffect(() => {
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB08y8T9MQJpbtkr0sW8FdncZzsBewqqM8&libraries=places&callback=initMap&loading=async`,
+      `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_GOOGLE_MAPS_KEY}&libraries=places&callback=initMap&loading=async`,
       () => {}
     );
 

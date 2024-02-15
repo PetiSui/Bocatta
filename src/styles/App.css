@@ -184,8 +184,7 @@ input[type='file'] {
 }
 
 .image_text{
-  font-size: var(--ff-size-s);
-  /* text-wrap: nowrap; */
+  font-size: calc(var(--ff-size-m) * 0.9);
 }
 
 .update{
