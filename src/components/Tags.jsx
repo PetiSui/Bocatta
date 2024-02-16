@@ -2,6 +2,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Tags = ({ tags }) => {
+  if(!tags || tags.length === 0) return;
+
   let categories = Array.from({ length: tags.length });
 
   for (let i = 0; i < tags.length; i++) {

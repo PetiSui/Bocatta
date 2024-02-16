@@ -82,7 +82,6 @@ function App() {
           ) || [NoImage],
         rating: addressObject?.rating || "",
         priceLevel: addressObject?.price_level || "",
-        totalReviews: addressObject?.user_ratings_total || "",
         categories: [],
       };
       console.dir(data);

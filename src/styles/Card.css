@@ -15,7 +15,8 @@
   --clr-primary: rgb(72, 218, 218);
   --clr-heart: rgb(204, 51, 51);
   --clr-dark-grey: rgb(80, 78, 78);
-  --clr-light-grey: rgb(162, 162, 162);
+  --clr-light-grey: rgb(178, 170, 170);
+  --clr-white-hover: rgb(214, 213, 213);
   --clr-shadow: rgba(208, 208, 208, 0.375);
   --clr-black: rgba(14, 14, 14, 0.855);
   --clr-links: rgb(44, 138, 193);
@@ -237,14 +238,18 @@ button {
 
 .like {
   color: var(--clr-heart);
-  border-radius: 50%;
-  filter: drop-shadow(-1px 0px 3px rgba(124, 124, 124, 0.307));
-  padding: 0.6rem;
-  background-color: white;
 }
 
 .like_button {
   margin-left: auto;
+  padding: 0.75rem;
+  border-radius: 50%;
+  filter: drop-shadow(-1px 0px 3px rgba(124, 124, 124, 0.307));
+  background-color: var(--clr-card);
+}
+
+.like_button:hover {
+  background-color: var(--clr-white-hover);
 }
 
 .phone {
@@ -254,7 +259,7 @@ button {
 }
 
 .phone_details:hover .phone {
-  animation: phoneShake ease-in-out 0.6s;
+  animation: phoneShake ease-in-out 0.4s;
 }
 
 .street_details {
@@ -262,6 +267,7 @@ button {
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
+  margin-top: 0.9rem;
   margin-bottom: 0.6rem;
   padding: 0;
 }
@@ -280,22 +286,20 @@ button {
   gap: 0.6rem;
   align-items: center;
   margin-top: 0.45rem;
-  margin-bottom: 0.9rem;
-  /* justify-content: space-around; */
 }
 
 .tag {
   color: var(--clr-black);
   font-weight: 700;
   /* vertical-align: middle; */
-  font-size: calc(var(--ff-size-s) + 0.05rem);
+  font-size: calc(var(--ff-size-s));
   line-height: 3ch;
-  padding-inline: 0.5rem;
-  padding-block: 0.25rem;
+  padding-inline: 0.6rem;
+  padding-block: 0.2rem;
   border-radius: 20px;
-  -webkit-box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.373);
-  -moz-box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.378);
-  box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.476);
+  -webkit-box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.552);
+  -moz-box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.552);
+  box-shadow: 0px 0px 21px -7px rgba(18, 18, 18, 0.552);
 }
 
 .almuerzos {
@@ -353,10 +357,10 @@ button {
 } */
 
 .like[data-liked="true"] {
-  animation: heartbeat 1s 1;
+  animation: heartbeat 600ms 1;
 }
 .like[data-liked="false"] {
-  animation: shake 0.5s 1;
+  animation: shake 500ms 1;
 }
 
 @keyframes phoneShake {

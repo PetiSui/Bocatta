@@ -121,8 +121,8 @@ h1 {
   border: 2px solid white;
 }
 
-.edit_params > div > input {
-  padding: .2rem;
+input[type="text"], input[type="number"] {
+  padding: .25rem;
 }
 
 .button_send {
@@ -207,7 +207,7 @@ input[type='file'] {
   gap: 1.5rem;
 }
 
-.image_ratings > div{
+.image_ratings > div:first-child{
   flex: 1;
 }
 
@@ -222,6 +222,10 @@ input[type='file'] {
 }
 
 #telephone{
+  min-width: 16ch;
+}
+
+#pricing{
   min-width: 16ch;
 }
 
