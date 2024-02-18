@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const schemas = require("../models/schemas");
+const axios = require("axios");
 
 router.post("/cards", async (req, res) => {
   // console.log(req.body);
@@ -29,9 +30,15 @@ router.post("/cards", async (req, res) => {
     priceLevel: priceLevel,
     categories: categories,
   };
+
+  await axios.get(cardData.photos).then(res => {
+    console.log(res.request._redirectable._options.href);
+    return res.request._redirectable._options.href;
+  });
+
   console.log(cardData);
   const card = new schemas.Card(cardData);
-  const saveCard = await card.save();
+  const saveCard = await card.save().catch(err=>console.log("DB ERROR"));
   if (saveCard) {
     res.send("OK");
   }
