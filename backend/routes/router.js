@@ -15,12 +15,12 @@ router.post("/cards", async (req, res) => {
     rating,
     priceLevel,
     categories,
-  } = JSON.parse(req.body);
-  
+  } = req.body;
+
   const cardData = {
     address: address,
     name: name,
-    id: id,
+    _id: id,
     telephone: telephone,
     url: url,
     website: website,

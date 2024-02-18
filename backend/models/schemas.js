@@ -5,7 +5,7 @@ const cardSchema = new Schema({
   entryDate: { type: Date, default: Date.now() },
   address: { type: String },
   name: { type: String },
-  id: { type: String },
+  _id: { type: String },
   telephone: { type: String },
   url: { type: String },
   website: { type: String },
