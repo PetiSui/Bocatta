@@ -4,7 +4,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const Website = ({ website }) => {
   if (!website || website === "") return;
-  console.log(website);
+  
   return (
     <button
       title="Sitio web"

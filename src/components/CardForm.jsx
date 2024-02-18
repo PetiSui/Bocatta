@@ -17,7 +17,7 @@ function CardForm({
   const [isDragged, setIsDragged] = useState(false);
 
   useEffect(() => {
-    console.log(categoriasSeleccionadas);
+    //console.log(categoriasSeleccionadas);
     modifyData("categories", ...categoriasSeleccionadas);
   }, [categoriasSeleccionadas]);
 
@@ -26,6 +26,7 @@ function CardForm({
     "Argentino",
     "Bocadillos",
     "Buffet",
+    "Croquetas",
     "Desayunos",
     "Hamburguesas",
     "Horchateria",
@@ -33,6 +34,7 @@ function CardForm({
     "Pizza",
     "Sushi",
     "Tapas",
+    "Tortilla",
   ];
 
   function handleCategorias(categoria) {
@@ -125,10 +127,12 @@ function CardForm({
     const baseURL = "http://localhost:4000";
     const postData = {
       ...data,
+      //photos: ""
       photos: data?.photos[indexImg],
     };
+    console.log(postData);
     await axios
-      .post(`${baseURL}/cards`, JSON.stringify(postData))
+      .post(`${baseURL}/cards`, postData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
@@ -190,7 +194,19 @@ function CardForm({
                 );
               })}
             </div>
-            <div className="image_ratings">
+            <div className="form_row">
+              <div>
+                <label htmlFor="description">Nombre: </label>
+                <input
+                  type="text"
+                  name="description"
+                  id="description"
+                  defaultValue={data?.name}
+                  onChange={(e) => {
+                    modifyData("name", e.target.value);
+                  }}
+                />
+              </div>
               <div>
                 <label htmlFor="rating">Valoración: </label>
                 <input
@@ -198,9 +214,23 @@ function CardForm({
                   name="rating"
                   id="rating"
                   defaultValue={data?.rating}
-                  size="4"
                   onChange={(e) => {
                     modifyData("rating", e.target.value.replace(",", "."));
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form_row">
+              <div>
+                <label htmlFor="address">Dirección: </label>
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  defaultValue={data?.address}
+                  onChange={(e) => {
+                    modifyData("address", e.target.value);
                   }}
                 />
               </div>
@@ -211,52 +241,13 @@ function CardForm({
                   name="pricing"
                   id="pricing"
                   defaultValue={data?.priceLevel}
-                  size="4"
                   onChange={(e) => {
                     modifyData("priceLevel", e.target.value);
                   }}
                 />
               </div>
             </div>
-            <div>
-              <label htmlFor="description">Nombre: </label>
-              <input
-                type="text"
-                name="description"
-                id="description"
-                defaultValue={data?.name}
-                size="50"
-                onChange={(e) => {
-                  modifyData("name", e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="address">Dirección: </label>
-              <input
-                type="text"
-                name="address"
-                id="address"
-                defaultValue={data?.address}
-                size="50"
-                onChange={(e) => {
-                  modifyData("address", e.target.value);
-                }}
-              />
-            </div>
-            <div className="contact_info">
-              <div>
-                <label htmlFor="telephone">Teléfono: </label>
-                <input
-                  type="text"
-                  name="telephone"
-                  id="telephone"
-                  defaultValue={data?.telephone}
-                  onChange={(e) => {
-                    modifyData("telephone", e.target.value);
-                  }}
-                />
-              </div>
+            <div className="form_row">
               <div>
                 <label htmlFor="website">Sitio Web: </label>
                 <input
@@ -266,6 +257,18 @@ function CardForm({
                   defaultValue={data?.website}
                   onChange={(e) => {
                     modifyData("website", e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="telephone">Teléfono: </label>
+                <input
+                  type="text"
+                  name="telephone"
+                  id="telephone"
+                  defaultValue={data?.telephone}
+                  onChange={(e) => {
+                    modifyData("telephone", e.target.value);
                   }}
                 />
               </div>

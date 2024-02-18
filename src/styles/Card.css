@@ -23,17 +23,19 @@
   --clr-links-hover: rgb(32, 98, 136);
   --clr-euros: rgb(93, 178, 228);
 
-  --clr-almuerzos: rgb(246, 228, 69);
+  --clr-almuerzos: rgb(169, 210, 63);
   --clr-argentino: rgb(117, 174, 224);
   --clr-bocadillos: rgb(237, 178, 105);
   --clr-buffet: rgb(76, 219, 204);
+  --clr-croquetas: rgb(253, 188, 97);
   --clr-horchateria: rgb(238, 179, 154);
   --clr-hamburguesas: rgb(250, 128, 128);
   --clr-desayunos: rgb(110, 165, 254);
   --clr-mexicano: rgb(83, 197, 87);
   --clr-pizza: rgb(245, 92, 65);
   --clr-sushi: rgb(38, 166, 154);
-  --clr-tapas: rgb(242, 142, 28);
+  --clr-tapas: rgb(196, 81, 32);
+  --clr-tortilla: rgb(218, 209, 36);
 }
 
 * {
@@ -183,7 +185,7 @@ a:hover {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   margin-right: 0.4rem;
   z-index: 100;
   display: flex;
@@ -318,6 +320,10 @@ button {
   background-color: var(--clr-buffet);
 }
 
+.croquetas {
+  background-color: var(--clr-croquetas);
+}
+
 .desayunos {
   background-color: var(--clr-desayunos);
 }
@@ -344,6 +350,10 @@ button {
 
 .tapas {
   background-color: var(--clr-tapas);
+}
+
+.tortilla {
+  background-color: var(--clr-tortilla);
 }
 
 .globe:hover,
@@ -443,21 +453,30 @@ button {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --clr-text: rgb(235, 231, 231);
-    --clr-card: rgba(198, 198, 198, 0.804);
+    --clr-text: rgb(215, 215, 215);
+    /* --clr-card: rgba(48, 48, 48, 0.948); */
+    --clr-card: #F0F2F5;
     --clr-heart: rgb(237, 41, 15);
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
     --clr-shadow: rgba(0, 40, 80, 0.2);
-    --clr-links: rgb(42, 119, 164);
-    --clr-dark: #171717;
-  }
-
-  p {
-    color: var(--clr-text);
+    --clr-links: rgb(64, 165, 223);
+    --clr-dark: #141414;
   }
 
   .descripcion {
+    color: var(--clr-dark);
+  }
+
+  .globe, .share, .phone, .map{
+    color: var(--clr-dark-grey);
+  }
+
+  .like_button{
+    background-color: #FAFAFA;
+  }
+
+  label, span{
     color: var(--clr-dark);
   }
 }

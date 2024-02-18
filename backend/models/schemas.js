@@ -12,11 +12,11 @@ const cardSchema = new Schema({
   photos: { type: String },
   rating: { type: Number },
   priceLevel: { type: Number },
-  totalReviews: { type: String },
-  categories: { type: Array },
+  categories: { type: Array }
 });
 
-const Cards = mongoose.model("Cards", cardSchema, "cards");
-const mySchemas = { 'Cards': Cards };
+const Card = mongoose.model("Cards", cardSchema, "cards");
 
-module.export = mySchemas;
+const mySchemas = { 'Card':Card };
+
+module.exports = mySchemas;

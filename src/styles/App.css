@@ -109,7 +109,7 @@ h1 {
   border: 2px dashed white;
   padding: 1.5rem;
   border-radius: 5px;
-  width: 80%;
+  width: 75%;
 }
 
 .hover_upload_file{
@@ -200,37 +200,29 @@ input[type='file'] {
   color: var(--clr-card);
 }
 
-.image_ratings, .contact_info{
+.form_row{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5rem;
 }
 
-.image_ratings > div:first-child{
-  flex: 1;
-}
-
-.contact_info > div{
+.form_row > div {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
-.contact_info > div:nth-child(2){
+.form_row > div:first-child {
   flex: 1;
 }
 
-#telephone{
-  min-width: 16ch;
+#rating, #pricing {
+  max-width: 14ch;
 }
 
-#pricing{
-  min-width: 16ch;
-}
-
-#website{
-  min-width: 32ch;
+#telephone {
+  max-width: 16ch;
 }
 
 @keyframes pulse {
@@ -246,13 +238,10 @@ input[type='file'] {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --clr-text: rgb(235, 231, 231);
-    --clr-card: rgba(198, 198, 198, 0.804);
-    --clr-heart: rgb(237, 41, 15);
+    --clr-text: rgb(215, 215, 215); 
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
     --clr-shadow: rgba(0, 40, 80, 0.2);
-    --clr-links: rgb(42, 119, 164);
     --clr-body: rgb(228, 228, 228);
   }
 
@@ -326,6 +315,18 @@ input[type='file'] {
     max-width: 80%;
     align-self: center;
   } */
+
+  .form_row{
+    flex-direction: column !important;
+  }
+
+  .form_row > div{
+    flex: 1;
+  }
+
+  #rating, #pricing, #telephone {
+    max-width: 100%;
+  }
 
   .app{
     width: 100%;
