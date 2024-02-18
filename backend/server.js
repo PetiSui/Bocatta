@@ -31,5 +31,3 @@ const port = process.env.PORT;
 const server = app.listen(port, () => {
   console.log(`Servidor funcionando en el puerto ${port}`);
 });
-
-server.listen(port).on("error", /*...*/)

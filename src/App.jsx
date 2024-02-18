@@ -64,7 +64,7 @@ function App() {
 
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
-    console.dir(addressObject);
+    //console.dir(addressObject);
     if (addressObject?.reference != null) {
       let data = {
         address: addressObject?.formatted_address || "",
@@ -81,10 +81,10 @@ function App() {
             })
           ) || [NoImage],
         rating: addressObject?.rating || "",
-        priceLevel: addressObject?.price_level || "",
+        priceLevel: addressObject?.price_level || 0,
         categories: [],
       };
-      console.dir(data);
+      //console.dir(data);
       updateQuery(data);
       setEstablishment(data?.address);
     }

@@ -18,7 +18,7 @@ router.post("/cards", async (req, res) => {
     categories,
   } = req.body;
 
-  const cardData = {
+  let cardData = {
     address: address,
     name: name,
     _id: id,
@@ -31,14 +31,21 @@ router.post("/cards", async (req, res) => {
     categories: categories,
   };
 
-  await axios.get(cardData.photos).then(res => {
-    console.log(res.request._redirectable._options.href);
-    return res.request._redirectable._options.href;
-  });
+  if (photos.substring(0, 5) === "https") {
+    //IS URL, NOT BASE64
+    const newPhotoUrl = await axios.get(cardData.photos).then((res) => {
+      //console.log(res.request._redirectable._options.href);
+      return res.request._redirectable._options.href;
+    });
+    if (newPhotoUrl) {
+      cardData = { ...cardData, photos: newPhotoUrl };
+    }
+  }
 
-  console.log(cardData);
+  //console.log(cardData);
+
   const card = new schemas.Card(cardData);
-  const saveCard = await card.save().catch(err=>console.log("DB ERROR"));
+  const saveCard = await card.save().then(data => console.log("INSERT SUCCESSFUL\n" + data)).catch((err) => console.log("DATA NOT INSERTED!"));
   if (saveCard) {
     res.send("OK");
   }

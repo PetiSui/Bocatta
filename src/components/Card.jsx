@@ -11,7 +11,7 @@ import "../styles/Card.css";
 
 function Card({ data, indexImg }) {
   const [imageSourceUrl, setImageSourceUrl] = useState("");
-  //console.log(data);
+  console.log(data);
   useEffect(() => {
     setImageSourceUrl(data?.photos[indexImg]);
   }, [indexImg]);

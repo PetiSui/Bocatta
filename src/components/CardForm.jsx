@@ -21,6 +21,8 @@ function CardForm({
     modifyData("categories", ...categoriasSeleccionadas);
   }, [categoriasSeleccionadas]);
 
+  console.log(data);
+
   const categorias = [
     "Almuerzos",
     "Argentino",
@@ -201,7 +203,7 @@ function CardForm({
                   type="text"
                   name="description"
                   id="description"
-                  defaultValue={data?.name}
+                  value={data?.name}
                   onChange={(e) => {
                     modifyData("name", e.target.value);
                   }}
@@ -213,7 +215,7 @@ function CardForm({
                   type="text"
                   name="rating"
                   id="rating"
-                  defaultValue={data?.rating}
+                  value={data?.rating}
                   onChange={(e) => {
                     modifyData("rating", e.target.value.replace(",", "."));
                   }}
@@ -228,21 +230,23 @@ function CardForm({
                   type="text"
                   name="address"
                   id="address"
-                  defaultValue={data?.address}
+                  value={data?.address}
                   onChange={(e) => {
                     modifyData("address", e.target.value);
                   }}
                 />
               </div>
               <div>
-                <label htmlFor="rating">Precio: </label>
+                <label htmlFor="rating">Coste: </label>
                 <input
                   type="number"
                   name="pricing"
                   id="pricing"
-                  defaultValue={data?.priceLevel}
+                  min="0" 
+                  max="3"
+                  value={isNaN(data?.priceLevel) ? 0 : data?.priceLevel}
                   onChange={(e) => {
-                    modifyData("priceLevel", e.target.value);
+                    modifyData("priceLevel", isNaN(e.target.value) ? 0 : e.target.value);
                   }}
                 />
               </div>
@@ -254,7 +258,7 @@ function CardForm({
                   type="text"
                   name="website"
                   id="website"
-                  defaultValue={data?.website}
+                  value={data?.website}
                   onChange={(e) => {
                     modifyData("website", e.target.value);
                   }}
@@ -266,7 +270,7 @@ function CardForm({
                   type="text"
                   name="telephone"
                   id="telephone"
-                  defaultValue={data?.telephone}
+                  value={data?.telephone}
                   onChange={(e) => {
                     modifyData("telephone", e.target.value);
                   }}
