@@ -367,10 +367,10 @@ button {
 } */
 
 .like[data-liked="true"] {
-  animation: heartbeat 600ms 1;
+  animation: heartbeat 700ms;
 }
 .like[data-liked="false"] {
-  animation: shake 500ms 1;
+  animation: shake 500ms;
 }
 
 @keyframes phoneShake {
