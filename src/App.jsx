@@ -3,7 +3,7 @@ import Card from "./components/Card.jsx";
 import "./styles/App.css";
 import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 import CardForm from "./components/CardForm.jsx";
-import NoImage from './img/noimage.webp';
+import NoImage from "./img/noimage.webp";
 
 let autoComplete;
 var addressObject;
@@ -73,13 +73,12 @@ function App() {
         telephone: addressObject?.formatted_phone_number || "",
         url: addressObject?.url || "",
         website: addressObject?.website || "",
-        photos:
-          addressObject?.photos?.map((photo) =>
-            photo.getUrl({
-              maxWidth: 400,
-              maxHeight: 300,
-            })
-          ) || [NoImage],
+        photos: addressObject?.photos?.map((photo) =>
+          photo.getUrl({
+            maxWidth: 400,
+            maxHeight: 300,
+          })
+        ) || [NoImage],
         rating: addressObject?.rating || "",
         priceLevel: addressObject?.price_level || 0,
         categories: [],
@@ -87,6 +86,7 @@ function App() {
       //console.dir(data);
       updateQuery(data);
       setEstablishment(data?.address);
+      setImageIndex(0);
     }
   };
 
@@ -108,7 +108,7 @@ function App() {
     };
   }, []);
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     return false;
   }
@@ -121,7 +121,7 @@ function App() {
 
   function incrementIndex() {
     setImageIndex((prevIndex) =>
-      imageIndex == establishmentData?.photos?.length - 1 ? 0 : imageIndex + 1
+      prevIndex == establishmentData?.photos?.length - 1 ? 0 : prevIndex + 1
     );
   }
 
