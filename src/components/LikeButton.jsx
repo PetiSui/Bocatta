@@ -44,13 +44,13 @@ const LikeButton = ({id}) => {
           icon={faHeart}
           className="like"
           size="xl"
+          data-liked={clicked.toString()}
         ></FontAwesomeIcon>
       ) : (
         <FontAwesomeIcon
           icon={faEmptyHeart}
           className="like"
           size="xl"
-          data-liked={clicked.toString()}
         ></FontAwesomeIcon>
       )}
     </button>
