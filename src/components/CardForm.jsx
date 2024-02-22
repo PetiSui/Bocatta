@@ -21,7 +21,7 @@ function CardForm({
     modifyData("categories", ...categoriasSeleccionadas);
   }, [categoriasSeleccionadas]);
 
-  console.log(data);
+  //console.log(data);
 
   const categorias = [
     "Almuerzos",

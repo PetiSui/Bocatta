@@ -5,14 +5,22 @@ import { faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 
 const LikeButton = ({id}) => {
 
-  const initialLike = localStorage?.getItem(id) || null;
-  //console.log(initialLike);
-  let [liked, setLiked] = useState(initialLike);
-  //TODO: UseEffect to load localStorage liked
+  let likedEstablishments = JSON.parse(localStorage.getItem('likedEstablishments')) || [];
+  console.log(likedEstablishments);
+
+  let [likedPlaces, setLikedPlaces] = useState(likedEstablishments);
+  let [clicked, setClicked] = useState(false);
+  
+  
+  
+  
+  let found = likedEstablishments.includes(id);
+  console.log(found);
 
   const handleLiked = () => {
-    localStorage.setItem(id, !liked);
-    setLiked((prevLiked) => !prevLiked);
+    found ? likedEstablishments = likedEstablishments.filter(item => item != id) : likedEstablishments.push(id);
+    localStorage.setItem('likedEstablishments', JSON.stringify(likedEstablishments))
+    setLikedPlaces(likedEstablishments);
   };
 
   return (
@@ -20,23 +28,24 @@ const LikeButton = ({id}) => {
       title="Me gusta"
       className="like_button"
       onClick={() => {
-        // setLiked((prevLiked) => !prevLiked);
+        setClicked(true);
         handleLiked();
       }}
+      clicked={clicked}
     >
-      {!liked ? (
+      {found ? (
         <FontAwesomeIcon
           icon={faHeartBroken}
           className="like"
-          size="lg"
-          data-liked={liked}
+          size="xl"
+          // data-liked={clicked.toString()}
         ></FontAwesomeIcon>
       ) : (
         <FontAwesomeIcon
           icon={faHeart}
           className="like"
-          size="lg"
-          data-liked={liked}
+          size="xl"
+          data-liked={clicked.toString()}
         ></FontAwesomeIcon>
       )}
     </button>

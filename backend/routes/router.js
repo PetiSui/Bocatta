@@ -39,6 +39,7 @@ router.post("/cards", async (req, res) => {
     });
     if (newPhotoUrl) {
       cardData = { ...cardData, photos: newPhotoUrl };
+      //STORE IMAGE
     }
   }
 

@@ -10,11 +10,11 @@ import Tags from "./Tags";
 import "../styles/Card.css";
 
 function Card({ data, indexImg }) {
-  const [imageSourceUrl, setImageSourceUrl] = useState("");
-  console.log(data);
+  const [imageSourceUrl, setImageSourceUrl] = useState(data?.photos[indexImg] || "");
+  //console.log(data);
   useEffect(() => {
     setImageSourceUrl(data?.photos[indexImg]);
-  }, [indexImg]);
+  }, [data?.photos, indexImg]);
   
   return (
     <>

@@ -244,10 +244,10 @@ button {
 
 .like_button {
   margin-left: auto;
-  padding: 0.75rem;
+  padding: 0.7rem;
   border-radius: 50%;
   filter: drop-shadow(-1px 0px 3px rgba(124, 124, 124, 0.307));
-  background-color: var(--clr-card);
+  background-color: #F2F2F2;
 }
 
 .like_button:hover {
@@ -369,9 +369,10 @@ button {
 .like[data-liked="true"] {
   animation: heartbeat 700ms;
 }
-.like[data-liked="false"] {
+
+/* .like[data-liked="false"] {
   animation: shake 500ms;
-}
+} */
 
 @keyframes phoneShake {
   0% {
