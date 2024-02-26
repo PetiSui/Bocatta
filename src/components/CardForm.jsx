@@ -16,6 +16,7 @@ function CardForm({
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [isDragged, setIsDragged] = useState(false);
 
+ 
   useEffect(() => {
     //console.log(categoriasSeleccionadas);
     modifyData("categories", ...categoriasSeleccionadas);
@@ -40,6 +41,8 @@ function CardForm({
   ];
 
   function handleCategorias(categoria) {
+    if(data.categories.length === 0) setCategoriasSeleccionadas([])
+
     categoriasSeleccionadas.includes(categoria)
       ? setCategoriasSeleccionadas((prevCategorias) =>
           prevCategorias.filter((categ) => categ != categoria)
@@ -186,7 +189,7 @@ function CardForm({
                       type="checkbox"
                       id={categoria}
                       title={categoria}
-                      checked={categoriasSeleccionadas.includes(categoria)}
+                      checked={data?.categories.includes(categoria)}
                       value={categoria}
                       name={categoria}
                       onChange={() => handleCategorias(categoria)}

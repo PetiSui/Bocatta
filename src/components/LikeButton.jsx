@@ -7,18 +7,18 @@ import { faHeart as faEmptyHeart} from "@fortawesome/free-regular-svg-icons";
 const LikeButton = ({id}) => {
 
   let likedEstablishments = JSON.parse(localStorage.getItem('likedEstablishments')) || [];
-  console.log(likedEstablishments);
+  // console.log(likedEstablishments);
 
   let [likedPlaces, setLikedPlaces] = useState(likedEstablishments);
   let [clicked, setClicked] = useState(false);
-  console.log("Clicked " + clicked);
+  // console.log("Clicked " + clicked);
 
   let set = new Set(likedEstablishments);
-  console.log(set);
+  // console.log(set);
   
   // let found = likedEstablishments.includes(id);
   let found = set.has(id);
-  console.log(found);
+  // console.log(found);
 
   const handleLiked = () => {
     // found ? likedEstablishments = likedEstablishments.filter(item => item != id) : likedEstablishments.push(id);

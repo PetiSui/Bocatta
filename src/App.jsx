@@ -81,7 +81,7 @@ function App() {
         ) || [NoImage],
         rating: addressObject?.rating || "",
         priceLevel: addressObject?.price_level || 0,
-        categories: [],
+        categories: []
       };
       //console.dir(data);
       updateQuery(data);
