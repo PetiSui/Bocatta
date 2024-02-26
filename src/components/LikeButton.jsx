@@ -4,10 +4,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faEmptyHeart } from "@fortawesome/free-regular-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import usePrefersColorScheme from 'use-prefers-color-scheme'
+import usePrefersColorScheme from "use-prefers-color-scheme";
 
 const LikeButton = ({ id }) => {
-  let likedEstablishments = JSON.parse(localStorage.getItem("likedEstablishments")) || [];
+  let likedEstablishments =
+    JSON.parse(localStorage.getItem("likedEstablishments")) || [];
   // console.log(likedEstablishments);
 
   let [likedPlaces, setLikedPlaces] = useState(likedEstablishments);
@@ -33,7 +34,7 @@ const LikeButton = ({ id }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: colorScheme
+      theme: colorScheme,
     });
   const notifyDisliked = () =>
     toast.info("No me gusta 😟", {
@@ -61,6 +62,18 @@ const LikeButton = ({ id }) => {
 
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={colorScheme}
+      />
       <button
         title="Me gusta"
         className="like_button"
@@ -85,18 +98,6 @@ const LikeButton = ({ id }) => {
           ></FontAwesomeIcon>
         )}
       </button>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme={colorScheme}
-      />
     </>
   );
 };
