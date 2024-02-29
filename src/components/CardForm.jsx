@@ -4,6 +4,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import fileTypeChecker from "file-type-checker";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import usePrefersColorScheme from "use-prefers-color-scheme";
 
 function CardForm({
   data,
@@ -16,7 +19,9 @@ function CardForm({
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [isDragged, setIsDragged] = useState(false);
 
- 
+  const prefersColorScheme = usePrefersColorScheme();
+  const colorScheme = prefersColorScheme === "dark" ? "light" : "dark";
+
   useEffect(() => {
     //console.log(categoriasSeleccionadas);
     modifyData("categories", ...categoriasSeleccionadas);
@@ -41,7 +46,7 @@ function CardForm({
   ];
 
   function handleCategorias(categoria) {
-    if(data.categories.length === 0) setCategoriasSeleccionadas([])
+    if (data.categories.length === 0) setCategoriasSeleccionadas([]);
 
     categoriasSeleccionadas.includes(categoria)
       ? setCategoriasSeleccionadas((prevCategorias) =>
@@ -52,6 +57,29 @@ function CardForm({
           categoria,
         ]);
   }
+
+  const notifyOk = () =>
+    toast.success("Envío exitoso 😄", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: colorScheme,
+    });
+  const notifyError = () =>
+    toast.error("Error 😟", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: colorScheme,
+    });
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -138,8 +166,18 @@ function CardForm({
     console.log(postData);
     await axios
       .post(`${baseURL}/cards`, postData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200 && res.statusText === "OK" && res.data === "OK") {
+          notifyOk();
+        } else {
+          notifyError();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        notifyError();
+      });
   }
 
   function handleOnDragExit(e) {
@@ -245,11 +283,14 @@ function CardForm({
                   type="number"
                   name="pricing"
                   id="pricing"
-                  min="0" 
+                  min="0"
                   max="3"
                   value={isNaN(data?.priceLevel) ? 0 : data?.priceLevel}
                   onChange={(e) => {
-                    modifyData("priceLevel", isNaN(e.target.value) ? 0 : e.target.value);
+                    modifyData(
+                      "priceLevel",
+                      isNaN(e.target.value) ? 0 : e.target.value
+                    );
                   }}
                 />
               </div>

@@ -15,7 +15,7 @@ const LikeButton = ({ id }) => {
   let [clicked, setClicked] = useState(false);
 
   const prefersColorScheme = usePrefersColorScheme();
-  const colorScheme = prefersColorScheme === "dark" ? "dark" : "light";
+  const colorScheme = prefersColorScheme === "dark" ? "light" : "dark";
   // console.log("Clicked " + clicked);
 
   let set = new Set(likedEstablishments);

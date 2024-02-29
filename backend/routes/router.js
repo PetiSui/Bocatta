@@ -46,12 +46,19 @@ router.post("/cards", async (req, res) => {
   //console.log(cardData);
 
   const card = new schemas.Card(cardData);
-  const saveCard = await card.save().then(data => console.log("INSERT SUCCESSFUL\n" + data)).catch((err) => console.log("DATA NOT INSERTED!"));
-  if (saveCard) {
-    res.send("OK");
-  }
+  const saveCard = await card
+    .save()
+    .then((data) => {
+      console.log("INSERT SUCCESSFUL\n" + data);
+      res.status(200).send("OK").end();
+    })
+    .catch((err) => {
+      console.log("DATA NOT INSERTED!");
+      // console.log(err);
+      res.status(500).send("ERROR").end();
+    });
 
-  res.end();
+  // res.end();
 });
 
 module.exports = router;
