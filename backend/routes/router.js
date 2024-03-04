@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const schemas = require("../models/schemas");
 const axios = require("axios");
+const fs = require("fs");
+const base64Img = require("base64-img");
 
 router.post("/cards", async (req, res) => {
   // console.log(req.body);
@@ -31,6 +33,15 @@ router.post("/cards", async (req, res) => {
     categories: categories,
   };
 
+  async function downloadImage(url, filename) {
+    const response = await axios.get(url, { responseType: "arraybuffer" });
+
+    fs.writeFile(filename, response.data, (err) => {
+      if (err) throw err;
+      console.log("Image downloaded successfully!");
+    });
+  }
+
   if (photos.substring(0, 5) === "https") {
     //IS URL, NOT BASE64
     const newPhotoUrl = await axios.get(cardData.photos).then((res) => {
@@ -39,7 +50,6 @@ router.post("/cards", async (req, res) => {
     });
     if (newPhotoUrl) {
       cardData = { ...cardData, photos: newPhotoUrl };
-      //STORE IMAGE
     }
   }
 
@@ -51,10 +61,24 @@ router.post("/cards", async (req, res) => {
     .then((data) => {
       console.log("INSERT SUCCESSFUL\n" + data);
       res.status(200).send("OK").end();
+      //STORE IMAGE
+      cardData.photos.substring(0, 5) === "https"
+        ? downloadImage(cardData.photos, `./thumbnails/${cardData._id}.jpg`)
+        : base64Img.img(
+            cardData.photos,
+            "./thumbnails/",
+            cardData._id,
+            (err, filepath) => {}
+          );
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        console.error('Duplicate key error. Document already exists!');
+        // Handle the duplicate key error here (e.g., retry with different data)
+      } else {
+        console.error('An error occurred:', err);
+      }
       console.log("DATA NOT INSERTED!");
-      // console.log(err);
       res.status(500).send("ERROR").end();
     });
 

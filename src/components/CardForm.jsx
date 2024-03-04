@@ -98,6 +98,12 @@ function CardForm({
   function handleFileUpload(file) {
     const types = ["jpeg", "png", "gif"];
     // const file = event.target.files[0];
+    const maxAllowedSize = 50 * 1024 * 1024 //50MB;
+    if (file.size > maxAllowedSize) {
+      alert("Archivo demasiado grande. Max 50MB");
+      return;
+    }
+    
     try {
       if (file) {
         const fileReader = new FileReader();
@@ -130,7 +136,7 @@ function CardForm({
       <div className="update_image">
         <div className="update">
           <label htmlFor="image" className="image_text">
-            Subir imagen:
+            Subir imagen: <strong className="subtext">(Max 50MB)</strong>
           </label>
           <input
             type="file"
