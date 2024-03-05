@@ -80,6 +80,17 @@ function CardForm({
       progress: undefined,
       theme: colorScheme,
     });
+  const notifyDuplicate = () =>
+    toast.error("Ya estaba añadido :(", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: colorScheme,
+    });
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -173,13 +184,15 @@ function CardForm({
     await axios
       .post(`${baseURL}/cards`, postData)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
+        console.dir(res.data);
         if (
           res.status === 200 &&
-          res.statusText === "OK" &&
           res.data === "OK"
         ) {
           notifyOk();
+        } else if (res.status === 200 && res.data === "DUPLICATE") {
+          notifyDuplicate();
         } else {
           notifyError();
         }
@@ -288,7 +301,7 @@ function CardForm({
                 />
               </div>
               <div>
-                <label htmlFor="rating">Coste: </label>
+                <label htmlFor="pricing">Coste: </label>
                 {/* <input
                   type="number"
                   name="pricing"
@@ -304,8 +317,8 @@ function CardForm({
                   }}
                 /> */}
                 <select
-                  name="rating"
-                  id="rating"
+                  name="pricing"
+                  id="pricing"
                   value={isNaN(data?.priceLevel) ? 0 : data?.priceLevel}
                   onChange={(e) => {
                     modifyData(

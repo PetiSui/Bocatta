@@ -75,11 +75,13 @@ router.post("/cards", async (req, res) => {
       if (err.code === 11000) {
         console.error('Duplicate key error. Document already exists!');
         // Handle the duplicate key error here (e.g., retry with different data)
+        res.status(200).send("DUPLICATE").end();
       } else {
+        res.status(500).send("ERROR").end();
         console.error('An error occurred:', err);
       }
       console.log("DATA NOT INSERTED!");
-      res.status(500).send("ERROR").end();
+
     });
 
   // res.end();
