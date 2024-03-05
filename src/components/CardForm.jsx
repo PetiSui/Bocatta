@@ -98,12 +98,12 @@ function CardForm({
   function handleFileUpload(file) {
     const types = ["jpeg", "png", "gif"];
     // const file = event.target.files[0];
-    const maxAllowedSize = 50 * 1024 * 1024 //50MB;
+    const maxAllowedSize = 5 * 1024 * 1024; //5MB;
     if (file.size > maxAllowedSize) {
       alert("Archivo demasiado grande. Max 50MB");
       return;
     }
-    
+
     try {
       if (file) {
         const fileReader = new FileReader();
@@ -136,7 +136,7 @@ function CardForm({
       <div className="update_image">
         <div className="update">
           <label htmlFor="image" className="image_text">
-            Subir imagen: <strong className="subtext">(Max 50MB)</strong>
+            Subir imagen: <strong className="subtext">(Max 5MB)</strong>
           </label>
           <input
             type="file"
@@ -174,7 +174,11 @@ function CardForm({
       .post(`${baseURL}/cards`, postData)
       .then((res) => {
         console.log(res);
-        if (res.status === 200 && res.statusText === "OK" && res.data === "OK") {
+        if (
+          res.status === 200 &&
+          res.statusText === "OK" &&
+          res.data === "OK"
+        ) {
           notifyOk();
         } else {
           notifyError();
@@ -285,7 +289,7 @@ function CardForm({
               </div>
               <div>
                 <label htmlFor="rating">Coste: </label>
-                <input
+                {/* <input
                   type="number"
                   name="pricing"
                   id="pricing"
@@ -298,7 +302,22 @@ function CardForm({
                       isNaN(e.target.value) ? 0 : e.target.value
                     );
                   }}
-                />
+                /> */}
+                <select
+                  name="rating"
+                  id="rating"
+                  value={isNaN(data?.priceLevel) ? 0 : data?.priceLevel}
+                  onChange={(e) => {
+                    modifyData(
+                      "priceLevel",
+                      isNaN(e.target.value) ? 0 : e.target.value
+                    );
+                  }}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
               </div>
             </div>
             <div className="form_row">

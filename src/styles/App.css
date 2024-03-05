@@ -13,7 +13,7 @@
   --clr-file-hover: rgb(97, 95, 95);
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
 }
@@ -34,7 +34,8 @@ body {
 }
 
 input,
-textarea {
+textarea,
+select {
   min-width: 0;
   width: 100%;
 }
@@ -79,7 +80,7 @@ h1 {
   border-radius: 0.3rem;
   width: clamp(50ch, 65ch, 80dvh);
   height: 4ch;
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .main {
@@ -97,13 +98,13 @@ h1 {
 .update_image {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .edit_params {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: 0.75rem;
   /* outline: white solid 2px;
   outline-style: dashed; */
   border: 2px dashed white;
@@ -112,7 +113,7 @@ h1 {
   width: 75%;
 }
 
-.hover_upload_file{
+.hover_upload_file {
   background-color: var(--clr-file-hover);
   place-items: center;
   justify-content: center;
@@ -121,8 +122,10 @@ h1 {
   border: 2px solid white;
 }
 
-input[type="text"], input[type="number"] {
-  padding: .25rem;
+input[type="text"],
+input[type="number"],
+select {
+  padding: 0.25rem;
 }
 
 .button_send {
@@ -170,29 +173,29 @@ input[type="text"], input[type="number"] {
   justify-content: space-between;
 }
 
-.categorias > div{
+.categorias > div {
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
   align-items: center;
 }
 
-input[type='file'] {
+input[type="file"] {
   color: transparent;
   /* width: auto; */
   font-size: var(--ff-size-s);
 }
 
-.image_text{
+.image_text {
   font-size: calc(var(--ff-size-m) * 0.9);
 }
 
-.subtext{
+.subtext {
   font-size: var(--ff-size-m);
   opacity: 0.9;
 }
 
-.update{
+.update {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -200,12 +203,12 @@ input[type='file'] {
   margin-right: auto;
 }
 
-.upload_text{
+.upload_text {
   font-size: var(--ff-size-xl);
   color: var(--clr-card);
 }
 
-.form_row{
+.form_row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -222,7 +225,8 @@ input[type='file'] {
   flex: 1;
 }
 
-#rating, #pricing {
+#rating,
+#pricing {
   max-width: 14ch;
 }
 
@@ -231,7 +235,8 @@ input[type='file'] {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     background-color: var(--clr-file-hover);
   }
   50% {
@@ -243,7 +248,7 @@ input[type='file'] {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --clr-text: rgb(215, 215, 215); 
+    --clr-text: rgb(215, 215, 215);
     --clr-dark-grey: rgb(80, 78, 78);
     --clr-light-grey: rgb(162, 162, 162);
     --clr-shadow: rgba(0, 40, 80, 0.2);
@@ -275,7 +280,7 @@ input[type='file'] {
     flex-direction: column;
     /* justify-content: flex-start; */
     align-items: flex-start;
-    gap: .2rem;
+    gap: 0.2rem;
     width: 100%;
     margin-top: 2rem;
   }
@@ -292,14 +297,12 @@ input[type='file'] {
     gap: 1rem;
   }
 
-
   .edit_params > div:not(.categorias) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 80vw;
   }
-  
 
   .update_image {
     display: flex;
@@ -321,19 +324,21 @@ input[type='file'] {
     align-self: center;
   } */
 
-  .form_row{
+  .form_row {
     flex-direction: column !important;
   }
 
-  .form_row > div{
+  .form_row > div {
     flex: 1;
   }
 
-  #rating, #pricing, #telephone {
+  #rating,
+  #pricing,
+  #telephone {
     max-width: 100%;
   }
 
-  .app{
+  .app {
     width: 100%;
   }
 }

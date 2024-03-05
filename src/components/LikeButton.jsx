@@ -34,7 +34,7 @@ const LikeButton = ({ id }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: colorScheme,
+      theme: colorScheme
     });
   const notifyDisliked = () =>
     toast.info("No me gusta 😟", {
@@ -63,16 +63,16 @@ const LikeButton = ({ id }) => {
   return (
     <>
       <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme={colorScheme}
+        // position="bottom-right"
+        // autoClose={5000}
+        // hideProgressBar={false}
+        // newestOnTop={false}
+        // closeOnClick
+        // rtl={false}
+        // pauseOnFocusLoss
+        // draggable
+        // pauseOnHover
+        // theme={colorScheme}
       />
       <button
         title="Me gusta"
