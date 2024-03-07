@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Card from "./components/Card.jsx";
 import "./styles/App.css";
-import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
+// import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 import CardForm from "./components/CardForm.jsx";
 import NoImage from "./img/noimage.webp";
 
@@ -70,7 +70,7 @@ function App() {
         address: addressObject?.formatted_address || "",
         name: addressObject?.name || "",
         id: addressObject?.reference || "unknown",
-        telephone: addressObject?.formatted_phone_number || "",
+        telephone: addressObject?.formatted_phone_number.replace("", "") || "",
         url: addressObject?.url || "",
         website: addressObject?.website || "",
         photos: addressObject?.photos?.map((photo) =>
@@ -81,7 +81,7 @@ function App() {
         ) || [NoImage],
         rating: addressObject?.rating || "",
         priceLevel: addressObject?.price_level || 0,
-        categories: []
+        categories: [],
       };
       //console.dir(data);
       updateQuery(data);
@@ -98,13 +98,19 @@ function App() {
   };
 
   useEffect(() => {
-    loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_GOOGLE_MAPS_KEY}&libraries=places&callback=initMap&loading=async`,
-      () => {}
-    );
+    // console.log(import.meta.env.VITE_GOOGLE_MAPS_KEY);
+    if (!window?.google) {
+      loadScript(
+        `https://maps.googleapis.com/maps/api/js?key=${
+          import.meta.env.VITE_GOOGLE_MAPS_KEY
+        }&libraries=places&callback=initMap&loading=async`,
+        () => {}
+      );
+    }
 
     return () => {
       setEstablishment("");
+      setEstablishmentData({});
     };
   }, []);
 

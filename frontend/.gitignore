@@ -26,7 +26,6 @@ dist-ssr
 
 # Constants
 
-/frontend/src/[Cc]onstants/
-/frontend/*.env
+/src/[Cc]onstants/
 /backend/*.env
 /backend/thumbnails/

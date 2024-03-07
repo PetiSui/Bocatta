@@ -132,7 +132,7 @@ function CardForm({
             return;
           }
           await addImage(file);
-          setImageIndex(() => data?.photos.length);
+          setImageIndex(() => data?.photos?.length);
         };
 
         fileReader.readAsArrayBuffer(file);
@@ -163,7 +163,7 @@ function CardForm({
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <span>
-            {indexImg + 1}/{data?.photos.length}
+            {indexImg + 1}/{data?.photos?.length}
           </span>
           <button onClick={() => incrementIndex()} className="button_counter">
             <FontAwesomeIcon icon={faArrowRight} />
@@ -184,12 +184,9 @@ function CardForm({
     await axios
       .post(`${baseURL}/cards`, postData)
       .then((res) => {
-        //console.log(res);
-        console.dir(res.data);
-        if (
-          res.status === 200 &&
-          res.data === "OK"
-        ) {
+        console.log(res);
+
+        if (res.status === 200 && res.data === "OK") {
           notifyOk();
         } else if (res.status === 200 && res.data === "DUPLICATE") {
           notifyDuplicate();
@@ -250,7 +247,7 @@ function CardForm({
                       type="checkbox"
                       id={categoria}
                       title={categoria}
-                      checked={data?.categories.includes(categoria)}
+                      checked={data?.categories?.includes(categoria)}
                       value={categoria}
                       name={categoria}
                       onChange={() => handleCategorias(categoria)}
