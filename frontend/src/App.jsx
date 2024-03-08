@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import React from 'react';
 import Card from "./components/Card.jsx";
 import "./styles/App.css";
 // import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";

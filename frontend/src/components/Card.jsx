@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from 'react';
 import Telephone from "./Telephone";
 import Street from "./Street";
 import ShareBar from "./ShareBar";

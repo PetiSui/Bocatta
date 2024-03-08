@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const Image = ({ description, imageSourceUrl, children }) => {
     return (
       <div className="relative">
