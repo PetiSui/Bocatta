@@ -15,6 +15,10 @@ Selecciona cualquier establecimento y genera una tarjeta con la información má
 * Librería Autocomplete de Google
 * File-Type-Checker
 * UUID
+* React-toastify
+* Axios
+* Use-prefers-color-scheme
+* File-type-checker
 
 ## Instalación
 
@@ -22,14 +26,9 @@ Clonar el repositorio
     
 Obtener tu API Key de Google
     
-Crea un archivo que contenga la API Key en el directorio **/constants/constants.js**
-    
-Dentro del archivo exporta la API Key de esta manera: 
-```javascript
-export const REACT_APP_GOOGLE_MAPS_KEY = "YOUR API KEY";
-```
+Crea un archivo **.env** que contenga la API Key con el prefijo **VITE_**
 
-Ejecutar el proyecto
+Ejecutar el proyecto con el comando
 
 ```sh
 npm run dev
