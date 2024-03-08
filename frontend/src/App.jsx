@@ -99,7 +99,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(import.meta.env.VITE_GOOGLE_MAPS_KEY);
+    //console.log(import.meta.env.VITE_GOOGLE_MAPS_KEY);
     if (!window?.google) {
       loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${
