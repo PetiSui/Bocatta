@@ -115,11 +115,6 @@ function App() {
     };
   }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    return false;
-  }
-
   function decrementIndex() {
     setImageIndex((prevIndex) =>
       prevIndex == 0 ? establishmentData?.photos?.length - 1 : prevIndex - 1
@@ -148,10 +143,10 @@ function App() {
     <>
       <div className="app">
         <main className="main">
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <h1>Inserte establecimiento</h1>
+            <h1>Generador de Tarjetas</h1>
+            <h2>Inserte establecimiento</h2>
             <div className="params">
-              <label htmlFor="nombre">Nombre: </label>
+              <label htmlFor="nombre" className="inputLabel">Nombre: </label>
               <input
                 ref={autoCompleteRef}
                 type="text"
@@ -163,7 +158,6 @@ function App() {
                 onChange={(e) => setEstablishment(e.target.value)}
               />
             </div>
-          </form>
         </main>
 
         <div className="tarjeta">

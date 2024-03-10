@@ -53,17 +53,31 @@ label {
 }
 
 h1 {
-  font-size: max(4dvw, var(--ff-size-xl));
+  font-size: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   font-weight: var(--fw-bold);
   font-family: var(--ff);
   text-wrap: balance;
   text-align: center;
+
+}
+
+h2{
+  font-size: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+  font-weight: var(--fw-normal);
+  font-family: var(--ff);
+  text-wrap: balance;
+  text-align: center;
+  opacity: .75;
 }
 
 .main {
   display: grid;
   place-items: center;
   gap: 1rem;
+}
+
+.main h2 {
+  margin-bottom: -2rem;
 }
 
 .params {
@@ -92,6 +106,10 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   place-items: center;
   gap: 3rem;
+}
+
+.inputLabel{
+  font-size: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
 }
 
 /* CARDFORM CSS */
