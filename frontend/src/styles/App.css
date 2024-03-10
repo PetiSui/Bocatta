@@ -58,7 +58,7 @@ h1 {
   font-family: var(--ff);
   text-wrap: balance;
   text-align: center;
-
+  line-height: 1.3;
 }
 
 h2{
