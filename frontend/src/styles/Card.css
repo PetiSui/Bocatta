@@ -277,9 +277,11 @@ button {
 
 .tag {
   color: var(--clr-black);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  opacity: .98;
   /* vertical-align: middle; */
-  font-size: calc(var(--ff-size-s));
+  font-size: calc(var(--ff-size-s) * 0.9);
   line-height: 3ch;
   padding-inline: 0.6rem;
   padding-block: 0.2rem;

@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 *.env
-
+.vite/*
 # Constants
 
 /frontend/src/[Cc]onstants/
