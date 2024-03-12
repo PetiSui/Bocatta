@@ -22,20 +22,6 @@
   --clr-links: rgb(44, 138, 193);
   --clr-links-hover: rgb(32, 98, 136);
   --clr-euros: rgb(93, 178, 228);
-
-  --clr-almuerzos: rgb(169, 210, 63);
-  --clr-argentino: rgb(117, 174, 224);
-  --clr-bocadillos: rgb(237, 178, 105);
-  --clr-buffet: rgb(76, 219, 204);
-  --clr-croquetas: rgb(253, 188, 97);
-  --clr-horchateria: rgb(238, 179, 154);
-  --clr-hamburguesas: rgb(250, 128, 128);
-  --clr-desayunos: rgb(110, 165, 254);
-  --clr-mexicano: rgb(83, 197, 87);
-  --clr-pizza: rgb(245, 92, 65);
-  --clr-sushi: rgb(38, 166, 154);
-  --clr-tapas: rgb(196, 81, 32);
-  --clr-tortilla: rgb(218, 209, 36);
 }
 
 * {
@@ -45,7 +31,6 @@
 label {
   font-size: var(--ff-size-m);
   font-weight: var(--fw-normal);
-  font-family: var(--ff);
 }
 
 img {
@@ -61,7 +46,7 @@ h1 {
 a {
   text-decoration: none;
   color: var(--clr-links);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   font-size: var(--ff-size-s);
   overflow: hidden;
   display: -webkit-box;
@@ -305,54 +290,67 @@ button {
 }
 
 .almuerzos {
+  --clr-almuerzos: rgb(169, 210, 63);
   background-color: var(--clr-almuerzos);
 }
 
 .argentino {
+  --clr-argentino: rgb(117, 174, 224);
   background-color: var(--clr-argentino);
 }
 
 .bocadillos {
+  --clr-bocadillos: rgb(237, 178, 105);
   background-color: var(--clr-bocadillos);
 }
 
 .buffet {
+  --clr-buffet: rgb(76, 219, 204);
   background-color: var(--clr-buffet);
 }
 
 .croquetas {
+  --clr-croquetas: rgb(253, 188, 97);
   background-color: var(--clr-croquetas);
 }
 
 .desayunos {
+  --clr-desayunos: rgb(110, 165, 254);
   background-color: var(--clr-desayunos);
 }
 
 .hamburguesas {
+  --clr-hamburguesas: rgb(250, 128, 128);
   background-color: var(--clr-hamburguesas);
 }
 
 .horchateria {
+  --clr-horchateria: rgb(238, 179, 154);
   background-color: var(--clr-horchateria);
 }
 
 .mexicano {
+  --clr-mexicano: rgb(83, 197, 87);
   background-color: var(--clr-mexicano);
 }
 
 .pizza {
+  --clr-pizza: rgb(245, 92, 65);
   background-color: var(--clr-pizza);
 }
 
 .sushi {
+  --clr-sushi: rgb(38, 166, 154);
   background-color: var(--clr-sushi);
 }
 
 .tapas {
+  --clr-tapas: rgb(196, 81, 32);
   background-color: var(--clr-tapas);
 }
 
 .tortilla {
+  --clr-tortilla: rgb(218, 209, 36);
   background-color: var(--clr-tortilla);
 }
 
