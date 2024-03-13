@@ -325,9 +325,9 @@ function CardForm({
                     );
                   }}
                 >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
+                  <option value="1">Bajo</option>
+                  <option value="2">Medio</option>
+                  <option value="3">Alto</option>
                 </select>
               </div>
             </div>
