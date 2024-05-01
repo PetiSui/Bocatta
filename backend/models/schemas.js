@@ -6,6 +6,8 @@ const cardSchema = new Schema({
   address: { type: String },
   name: { type: String },
   _id: { type: String },
+  lat: { type: Number},
+  lng: { type: Number},
   telephone: { type: String },
   url: { type: String },
   website: { type: String },

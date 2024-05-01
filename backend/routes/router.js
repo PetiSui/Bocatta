@@ -13,6 +13,8 @@ router.post("/cards", async (req, res) => {
     id,
     telephone,
     url,
+    lat,
+    lng,
     website,
     photos,
     rating,
@@ -26,6 +28,8 @@ router.post("/cards", async (req, res) => {
     _id: id,
     telephone: telephone,
     url: url,
+    lat: lat,
+    lng: lng,
     website: website,
     photos: photos,
     rating: rating,
@@ -71,17 +75,23 @@ router.post("/cards", async (req, res) => {
             (err, filepath) => {}
           );
     })
-    .catch((err) => {
+    .catch(async (err) => {
       if (err.code === 11000) {
-        console.error('Duplicate key error. Document already exists!');
+        console.error("Duplicate key. Document already exists!");
         // Handle the duplicate key error here (e.g., retry with different data)
+        await schemas.Card.findByIdAndUpdate(cardData._id, cardData)
+          .then((a) => {
+            console.log(a);
+            console.log("UPDATED");
+            res.status(200).send("UPDATED").end();
+          })
+          .catch((errUpdate) => console.err(errUpdate));
         res.status(200).send("DUPLICATE").end();
       } else {
         res.status(500).send("ERROR").end();
-        console.error('An error occurred:', err);
+        console.error("An error occurred:", err);
+        console.log("DATA NOT INSERTED!");
       }
-      console.log("DATA NOT INSERTED!");
-
     });
 
   // res.end();

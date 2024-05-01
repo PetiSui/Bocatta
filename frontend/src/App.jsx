@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import React from 'react';
 import Card from "./components/Card.jsx";
 import "./styles/App.css";
 // import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
@@ -49,30 +48,33 @@ function App() {
     });
   };
 
-  const toDataURL = (url) =>
-    fetch(url, { mode: "no-cors" })
-      .then((response) => response.blob())
-      .then(
-        (blob) =>
-          new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-          })
-      )
-      .catch((err) => console.log(err));
+  // const toDataURL = (url) =>
+  //   fetch(url, { mode: "no-cors" })
+  //     .then((response) => response.blob())
+  //     .then(
+  //       (blob) =>
+  //         new Promise((resolve, reject) => {
+  //           const reader = new FileReader();
+  //           reader.onloadend = () => resolve(reader.result);
+  //           reader.onerror = reject;
+  //           reader.readAsDataURL(blob);
+  //         })
+  //     )
+  //     .catch((err) => console.log(err));
 
   const handlePlaceSelect = async (updateQuery) => {
     addressObject = await autoComplete.getPlace();
-    //console.dir(addressObject);
+    console.dir(addressObject);
+    console.log(addressObject.geometry?.location?.lat());
     if (addressObject?.reference != null) {
       let data = {
         address: addressObject?.formatted_address || "",
         name: addressObject?.name || "",
         id: addressObject?.reference || "unknown_" + crypto.randomUUID(),
-        telephone: addressObject?.formatted_phone_number.replace("", "") || "",
+        telephone: addressObject?.formatted_phone_number || "",
         url: addressObject?.url || "",
+        lat: addressObject.geometry?.location?.lat() || "",
+        lng: addressObject.geometry?.location?.lng() || "",
         website: addressObject?.website || "",
         photos: addressObject?.photos?.map((photo) =>
           photo.getUrl({

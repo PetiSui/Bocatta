@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import fileTypeChecker from "file-type-checker";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import usePrefersColorScheme from "use-prefers-color-scheme";
 
@@ -28,7 +28,7 @@ function CardForm({
     modifyData("categories", ...categoriasSeleccionadas);
   }, [categoriasSeleccionadas]);
 
-  //console.log(data);
+  console.log(data);
 
   const categorias = [
     "Almuerzos",
@@ -82,7 +82,18 @@ function CardForm({
       theme: colorScheme,
     });
   const notifyDuplicate = () =>
-    toast.error("Ya estaba añadido :(", {
+    toast.error("No se ha actualizado", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: colorScheme,
+    });
+    const notifyUpdated = () =>
+    toast.info("Actualizado con éxito ⟲", {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -102,7 +113,7 @@ function CardForm({
     });
 
   async function addImage(image) {
-    let base64Image = await toBase64(image)
+    await toBase64(image)
       .then((result) => modifyData("photos", [...data.photos, result]))
       .catch((error) => console.log(error));
   }
@@ -191,6 +202,8 @@ function CardForm({
           notifyOk();
         } else if (res.status === 200 && res.data === "DUPLICATE") {
           notifyDuplicate();
+        }else if (res.status === 200 && res.data === "UPDATED") {
+          notifyUpdated();
         } else {
           notifyError();
         }
@@ -325,6 +338,9 @@ function CardForm({
                     );
                   }}
                 >
+                  {
+                    data?.priceLevel === 0 ? <option value="0" selected disabled>Selecciona</option> : <></>
+                  }
                   <option value="1">Bajo</option>
                   <option value="2">Medio</option>
                   <option value="3">Alto</option>
