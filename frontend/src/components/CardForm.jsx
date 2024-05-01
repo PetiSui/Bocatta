@@ -339,7 +339,7 @@ function CardForm({
                   }}
                 >
                   {
-                    data?.priceLevel === 0 ? <option value="0" selected disabled>Selecciona</option> : <></>
+                    data?.priceLevel === 0 ? <option value="0" disabled>Selecciona</option> : <></>
                   }
                   <option value="1">Bajo</option>
                   <option value="2">Medio</option>
