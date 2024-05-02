@@ -352,7 +352,17 @@ button {
 }
 
 .tortilla {
-  --clr-tortilla: rgb(218, 209, 36);
+  --clr-tortilla: rgb(229, 223, 65);
+  background-color: var(--clr-tortilla);
+}
+
+.tacos {
+  --clr-tacos: rgb(106, 218, 36);
+  background-color: var(--clr-tortilla);
+}
+
+.paella {
+  --clr-paella:rgb(240, 210, 16);
   background-color: var(--clr-tortilla);
 }
 

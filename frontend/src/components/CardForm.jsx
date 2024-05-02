@@ -40,8 +40,10 @@ function CardForm({
     "Hamburguesas",
     "Horchateria",
     "Mexicano",
+    "Paella",
     "Pizza",
     "Sushi",
+    "Tacos",
     "Tapas",
     "Tortilla",
   ];
