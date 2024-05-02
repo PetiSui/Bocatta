@@ -86,7 +86,6 @@ router.post("/cards", async (req, res) => {
             res.status(200).send("UPDATED").end();
           })
           .catch((errUpdate) => console.err(errUpdate));
-        res.status(200).send("DUPLICATE").end();
       } else {
         res.status(500).send("ERROR").end();
         console.error("An error occurred:", err);
