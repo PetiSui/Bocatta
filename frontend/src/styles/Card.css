@@ -366,6 +366,11 @@ button {
   background-color: var(--clr-paella);
 }
 
+.hotpot {
+  --clr-hotpot:rgb(244, 96, 22);
+  background-color: var(--clr-hotpot);
+}
+
 .globe:hover,
 .share:hover {
   color: var(--clr-primary);

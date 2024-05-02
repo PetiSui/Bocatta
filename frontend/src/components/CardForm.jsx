@@ -39,6 +39,7 @@ function CardForm({
     "Desayunos",
     "Hamburguesas",
     "Horchateria",
+    "Hotpot",
     "Mexicano",
     "Paella",
     "Pizza",
