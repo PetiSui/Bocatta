@@ -381,6 +381,11 @@ button {
   background-color: var(--clr-asiatico);
 }
 
+.parrilla{
+  --clr-parrilla:rgb(15, 102, 126);
+  background-color: var(--clr-parrilla);
+}
+
 .globe:hover,
 .share:hover {
   color: var(--clr-primary);
