@@ -376,6 +376,11 @@ button {
   background-color: var(--clr-pasta);
 }
 
+.asiatico{
+  --clr-asiatico:rgb(40, 242, 114);
+  background-color: var(--clr-asiatico);
+}
+
 .globe:hover,
 .share:hover {
   color: var(--clr-primary);

@@ -33,6 +33,7 @@ function CardForm({
   const categorias = [
     "Almuerzos",
     "Argentino",
+    "Asiatico",
     "Bocadillos",
     "Buffet",
     "Croquetas",
