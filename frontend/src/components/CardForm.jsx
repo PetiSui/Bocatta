@@ -42,6 +42,7 @@ function CardForm({
     "Hotpot",
     "Mexicano",
     "Paella",
+    "Pasta",
     "Pizza",
     "Sushi",
     "Tacos",

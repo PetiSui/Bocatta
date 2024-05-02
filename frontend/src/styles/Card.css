@@ -352,7 +352,7 @@ button {
 }
 
 .tortilla {
-  --clr-tortilla: rgb(229, 223, 65);
+  --clr-tortilla: rgb(248, 229, 17);
   background-color: var(--clr-tortilla);
 }
 
@@ -362,13 +362,18 @@ button {
 }
 
 .paella {
-  --clr-paella:rgb(240, 210, 16);
+  --clr-paella:rgb(255, 236, 29);
   background-color: var(--clr-paella);
 }
 
 .hotpot {
   --clr-hotpot:rgb(244, 96, 22);
   background-color: var(--clr-hotpot);
+}
+
+.pasta{
+  --clr-pasta:rgb(255, 210, 49);
+  background-color: var(--clr-pasta);
 }
 
 .globe:hover,
