@@ -386,6 +386,11 @@ button {
   background-color: var(--clr-parrilla);
 }
 
+.ramen{
+  --clr-ramen: rgb(175, 155, 130);
+  background-color: var(--clr-ramen);
+}
+
 .globe:hover,
 .share:hover {
   color: var(--clr-primary);
