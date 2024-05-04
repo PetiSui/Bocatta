@@ -47,7 +47,7 @@ a {
   text-decoration: none;
   color: var(--clr-links);
   font-weight: var(--fw-medium);
-  font-size: var(--ff-size-s);
+  font-size: var(--ff-size-s * 1.1);
   overflow: hidden;
   display: -webkit-box;
   width: 100%;
