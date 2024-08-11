@@ -55,6 +55,9 @@
 
   --clr-body: rgba(17, 17, 17, 0.793);
   --clr-file-hover: rgb(97, 95, 95);
+
+  --clr-white: rgb(242, 242, 242);
+  --clr-black: rgb(34, 34, 34);
 }
 
 * {
@@ -127,7 +130,7 @@ h2{
   justify-content: center;
   place-items: center;
   flex-direction: row;
-  gap: 0.7rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
@@ -145,7 +148,8 @@ h2{
 
 .tarjeta {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); */
+  grid-template-columns: .4fr .8fr;
   place-items: center;
   gap: 3rem;
 }
@@ -294,6 +298,25 @@ input[type="file"] {
   max-width: 16ch;
 }
 
+.btnAdd{
+  padding: .8rem;
+  background-color: var(--clr-white);
+  color: var(--clr-black);
+  border-radius: .25rem;
+}
+
+.btnAdd:hover{
+  background-color: var(--clr-light-grey);
+}
+
+.coord{
+  width: 14ch;
+}
+
+.gmaps{
+  max-width: 100%;
+}
+
 @keyframes pulse {
   0%,
   100% {
@@ -394,11 +417,22 @@ input[type="file"] {
 
   #rating,
   #pricing,
-  #telephone {
+  #telephone,
+  #lat {
     max-width: 100%;
   }
 
   .app {
+    width: 100%;
+  }
+
+  .btnAdd{
+    margin-top: .95rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .coord{
     width: 100%;
   }
 }

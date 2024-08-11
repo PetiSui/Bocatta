@@ -3,7 +3,7 @@ const router = express.Router();
 const schemas = require("../models/schemas");
 const axios = require("axios");
 const fs = require("fs");
-const base64Img = require("base64-img");
+const Img = require("base64-img");
 
 router.post("/cards", async (req, res) => {
   // console.log(req.body);
@@ -48,6 +48,7 @@ router.post("/cards", async (req, res) => {
 
   if (photos.substring(0, 5) === "https") {
     //IS URL, NOT BASE64
+    //console.log(cardData.photos);
     const newPhotoUrl = await axios.get(cardData.photos).then((res) => {
       //console.log(res.request._redirectable._options.href);
       return res.request._redirectable._options.href;

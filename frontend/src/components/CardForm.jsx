@@ -30,6 +30,10 @@ function CardForm({
 
   console.log(data);
 
+  if(data?.lat.length > 0 && data?.lng.length > 0 && data?.url.length === 0){
+
+  }
+
   const categorias = [
     "Almuerzos",
     "Argentino",
@@ -99,7 +103,7 @@ function CardForm({
       progress: undefined,
       theme: colorScheme,
     });
-    const notifyUpdated = () =>
+  const notifyUpdated = () =>
     toast.info("Actualizado con éxito ⟲", {
       position: "bottom-right",
       autoClose: 2000,
@@ -209,7 +213,7 @@ function CardForm({
           notifyOk();
         } else if (res.status === 200 && res.data === "DUPLICATE") {
           notifyDuplicate();
-        }else if (res.status === 200 && res.data === "UPDATED") {
+        } else if (res.status === 200 && res.data === "UPDATED") {
           notifyUpdated();
         } else {
           notifyError();
@@ -244,6 +248,22 @@ function CardForm({
     e.preventDefault();
     e.stopPropagation();
     setIsDragged(true);
+  }
+
+  function updateLatGmapsUrl(newLat){
+    let gMapsQuery = "https://www.google.com/maps/search/?api=1&query=";
+    gMapsQuery += newLat + "," + data?.lng;
+    console.log("GMAPS URL", gMapsQuery);
+
+    modifyData("url", gMapsQuery)
+  }
+
+  function updateLngGmapsUrl(newLng){
+    let gMapsQuery = "https://www.google.com/maps/search/?api=1&query=";
+    gMapsQuery += data?.lat + "," + newLng;
+    console.log("GMAPS URL", gMapsQuery);
+
+    modifyData("url", gMapsQuery)
   }
 
   return (
@@ -294,7 +314,9 @@ function CardForm({
               <div>
                 <label htmlFor="rating">Valoración: </label>
                 <input
-                  type="text"
+                  type="number"
+                  max={5}
+                  step={0.1}
                   name="rating"
                   id="rating"
                   value={data?.rating}
@@ -345,9 +367,13 @@ function CardForm({
                     );
                   }}
                 >
-                  {
-                    data?.priceLevel === 0 ? <option value="0" disabled>Selecciona</option> : <></>
-                  }
+                  {data?.priceLevel === 0 ? (
+                    <option value="0" disabled>
+                      Selecciona
+                    </option>
+                  ) : (
+                    <></>
+                  )}
                   <option value="1">Bajo</option>
                   <option value="2">Medio</option>
                   <option value="3">Alto</option>
@@ -379,6 +405,52 @@ function CardForm({
                   }}
                 />
               </div>
+            </div>
+            <div className="form_row">
+            <div>
+                <label htmlFor="gmaps">Gmaps:</label>
+                <input
+                  className="gmaps"
+                  type="text"
+                  name="url"
+                  id="url"
+                  value={data?.url}
+                  onChange={(e) => {
+                    modifyData("url", e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="lat">Lat:</label>
+                <input
+                  type="number"
+                  className="coord"
+                  name="lat"
+                  id="lat"
+                  step={0.0001}
+                  value={data?.lat}
+                  onChange={(e) => {
+                    modifyData("lat", e.target.value);
+                    updateLatGmapsUrl(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="lng">Lng:</label>
+                <input
+                  type="number"
+                  className="coord"
+                  name="lng"
+                  id="lng"
+                  step={0.0001}
+                  value={data?.lng}
+                  onChange={(e) => {
+                    modifyData("lng", e.target.value);
+                    updateLngGmapsUrl(e.target.value);
+                  }}
+                />
+              </div>
+              
             </div>
             <button
               onClick={() => handleSubmitData()}

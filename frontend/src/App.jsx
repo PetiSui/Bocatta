@@ -4,6 +4,8 @@ import "./styles/App.css";
 // import { REACT_APP_GOOGLE_MAPS_KEY } from "./constants/constants";
 import CardForm from "./components/CardForm.jsx";
 import NoImage from "./img/noimage.webp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 let autoComplete;
 var addressObject;
@@ -141,6 +143,25 @@ function App() {
     //console.dir(establishmentData);
   }
 
+  function createNewCard(){
+    let data = {
+      address: "",
+      name: "",
+      id: crypto.randomUUID(),
+      telephone: "",
+      url: "",
+      lat: "",
+      lng: "",
+      website: "",
+      photos: [NoImage],
+      rating: "",
+      priceLevel: 0,
+      categories: [],
+    };
+
+    setEstablishmentData(prev => data);
+  }
+
   return (
     <>
       <div className="app">
@@ -159,6 +180,7 @@ function App() {
                 placeholder="Nombre"
                 onChange={(e) => setEstablishment(e.target.value)}
               />
+              <button onClick={() => createNewCard()} className="btnAdd">Nuevo <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></button>
             </div>
         </main>
 
